@@ -11,7 +11,7 @@ import com.datatransforming.workflow.*;
 import lombok.ToString;
 
 @ToString
-public class SampleRequest extends AbstractRequestModel<SampleBuilderDTO> {
+public class SampleRequest extends AbstractRequestor<SampleBuilderDTO> {
 
 	private String requestValue;
 

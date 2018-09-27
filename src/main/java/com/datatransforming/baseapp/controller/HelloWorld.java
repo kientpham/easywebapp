@@ -10,6 +10,9 @@ public class HelloWorld {
 
 	 @RequestMapping("/")
 	    public String index() {
-		 	return new SampleRequest("Hello my workflow").processRequest();        
+		 	if (new SampleRequest("Hello my workflow").processRequest()!=null)
+		 		return "Successfully process the request";
+		 	else 
+		 		return "Unsuccesfully process the request";		 	
 	    }
 }
