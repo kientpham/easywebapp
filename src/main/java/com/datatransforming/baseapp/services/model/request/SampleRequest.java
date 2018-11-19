@@ -10,6 +10,11 @@ import com.datatransforming.workflow.*;
 
 import lombok.ToString;
 
+/**
+ * This is a test class for a request
+ * @author jm838d
+ *
+ */
 @ToString
 public class SampleRequest extends AbstractRequestor<SampleBuilderDTO> {
 
