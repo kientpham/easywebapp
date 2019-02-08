@@ -1,0 +1,128 @@
+<div class="modal fade" id="msgModal" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-msg">
+		<div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id="dialogTitle">Information</h4>
+				</div>
+				<div class="modal-body alignCenter">
+					<div id="modalMsgContent"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-action" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Add new dialog  -->
+<div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="dialogTitle">Media Image Preview</h4>
+			</div>
+			<div class="modal-body">
+				<div class="clearfix">
+					<div class="image-content">
+						<div class="disc-area">
+							<div class="pn-left">
+								<!-- ravel label disc -->
+								<div id="discW" class="label-disc">
+									<div class="logo-header">
+										<nav class="boeing-logo">
+											<div class="">
+												<img src="images/boeing-logo.png">
+											</div>
+										</nav>
+									</div>
+									<div class="lbl-product-branding fz-20">
+										<label id="product-format" class="input-header"></label><br>
+									</div>
+									<div class="lbl-common-name fz-22">
+										<span id="customer" class="input-header"></span><br>
+									</div>
+									<div class="text-middle">
+										<div class="left-middle">
+											<div class="disc-info fz-8">
+												<div class="text-logo">
+													<span class="fz-22 boeing-title">BOEING DIGITAL</span><br>
+													<span class="fz-11">Commercial Aviation Services</span>
+												</div>
+												<div id="rights" class="lbl-rights"></div>
+												<div id="export-statement" class="lbl-exportStatement"></div>
+											</div>
+										</div>
+										<div class="right-middle">
+											<div class="lbl-applicability">
+												<div id="applicability-label"
+													class="applicability cod-plane fz-22"></div>
+											</div>
+											<div class="lbl-physical-type">
+												<label id="lblDiscFormat"></label>
+											</div>
+											<div class="release-note-border" id="noteBorder"
+												onclick="clickNoteBorder()">
+												<input type="text" class="release-note" id="releaseNote"
+													maxlength="67" onkeyup="releaseNoteKeyUp(event)"
+													onkeydown="releaseNoteKeyDown(event)">
+											</div>
+											<div class="lbl-issued fz-17">
+												<label id="revision-date"></label>
+											</div>
+											<div class="lbl-packageTime fz-11">
+												<label id="package-timestamp"></label><span id="dashId"
+													class="dash-id">_</span><span id="burnerId"
+													class="burner-id"></span>
+											</div>
+										</div>
+									</div>
+									<div class="lbl-title fz-15" id="title"></div>
+									<div class="lbl-publication-details fz-16">
+										<span id="publication_detail"></span><br />
+									</div>
+									<input type="hidden" id="volumeId"></input><br />
+									<div class="inner-blue-circle">
+										<div class="inner-circle"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="infor-area">
+							<div class="pn-right">
+								<div class="infor-panel">
+									<div class="row-line">
+										<div class="col-left">Burner:</div>
+										<div class="col-right">
+											<select class="slt-burner input-control" id="sltBurner"
+												onchange="changeBurner(this)">
+											</select>
+										</div>
+									</div>
+									<div class="row-line">
+										<div class="col-left">Copies:</div>
+										<div class="col-right">
+											<input type="text" onkeypress='validate(event)' class="slt-copies input-control" 
+												maxlength="3" value="1" id="copies">
+										</div>
+									</div>
+									<div class="row-line">
+										<div class="col-left"></div>
+										<div class="col-right">
+											<button id="btnBurn" onclick="burn()"
+												class="btn-action btn-burn">BURN</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

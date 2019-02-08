@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Physical Media</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="css/jquery.dataTables.min.css" rel="stylesheet"
+	type="text/css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/app/productFormatConfig.js"></script>
+<script type="text/javascript" src="js/app/authorize.js"></script>
+</head>
+<body>
+	<div class="bg-background">
+		<div class="main">
+			<div class="menu-header">
+				<ul class="menu">
+					<li><a href="searchData.html">Search Data</a></li>
+					<li><a href="administration.html">Admin</a></li>
+					<li><a href="burnerConfig.html">Burners Configuration</a></li>
+					<li class="selected"><a href="productFormat.html">Product Formats</a></li>
+					<li><a href="dataView.html">Data View</a></li>
+				</ul>
+			</div>
+			<div style="clear: both; margin-top: 20px;"></div>
+			<div class="main-filter">
+				<div class="tbl-result">
+					<table id="tblResult" class="tbl-result" >
+						<thead>
+							<tr>
+								<th width="4%" style="text-align: center;"><input
+									type="checkbox" id="checkAll" /></th>
+								<th width="14%">Product Format</th>
+								<th width="12%">Label</th>
+								<th width="25%">Product Branding</th>
+								<th width="45%">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<div class="button-control">
+						<button class="btn-disabled" disabled="disabled" id="btnSavePF" onclick="updateProductFormat()">
+							SAVE
+						</button>
+						<button class="btn-disabled" disabled="disabled" id="btnReset" class="btn-action">RESET</button>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal fade" id="successDialog" role="dialog">
+				<div class="modal-dialog modal-msg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="dialogTitle">Information</h4>
+						</div>
+						<div class="modal-body alignCenter">
+							<div class="msgContent">
+								Your change has been saved successfully.
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn-action" data-dismiss="modal">OK</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="errorDialog" role="dialog">
+				<div class="modal-dialog modal-msg">
+					<div>
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title" id="dialogTitle">Information</h4>
+							</div>
+							<div class="modal-body alignCenter">
+								<div class="msgContent">
+									Sorry, an error has occurred! Please contact Administrator to troubleshoot.
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn-action" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="warningDialog" role="dialog">
+				<div class="modal-dialog modal-msg">
+					<div>
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title" id="dialogTitle">Information</h4>
+							</div>
+							<div class="modal-body alignCenter">
+								<div class="msgContent">
+									Please select at least one record.
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn-action" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="loadingProcess"></div>
+</body>
+</html>

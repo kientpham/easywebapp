@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Base App</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="css/jquery.dataTables.min.css" rel="stylesheet"
+	type="text/css">
+<link href="css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="css/newstyle.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="js/app/autodatabinding.js"></script>
+<script>
+
+var searchFormObj;
+var tableObj;
+var editFormObj;
+$(document).ready(function() {	
+	var tableGroupObj= new TableClass();
+	tableGroupObj.type="checkbox";
+	tableGroupObj.bFilter=false;
+	tableGroupObj.bPaginate=false;
+	tableGroupObj.order=1;	
+	tableGroupObj.tableId="#tblUserGroup";
+	tableGroupObj.getTableData="getGroupUserList";		
+	tableGroupObj.numberOfColumns=2;
+	tableGroupObj.checkAllId="#checkAllGroup";
+	
+	editFormObj=new EditForm();
+	editFormObj.idFieldName="id";
+	editFormObj.editForm="#editModal";
+	editFormObj.getDropDownValue="getAllCategories";
+	editFormObj.getValuesToBind="getUser";
+	editFormObj.saveDataObject="addUser";
+	editFormObj.editFormHtml="user_edit.html";
+	editFormObj.saveButtonId="#btnSave";
+	editFormObj.dataTableListObj=[tableGroupObj];
+	
+	tableObj= new TableClass();
+	tableObj.type="edit";
+	tableObj.bFilter=true;
+	tableObj.bPaginate=false;
+	tableObj.order=2;
+	tableObj.deleteController="deleteUsers";
+	tableObj.editFormObj=editFormObj;		
+	tableObj.tableId="#tblResult";
+	tableObj.getTableData="getUserDataTable";
+	tableObj.buttonAddId="#btnAdd";	
+	tableObj.numberOfColumns=9;			
+	tableObj.loadTable();
+		
+	var tableObj1= new TableClass();
+	tableObj1.type=1;
+	tableObj1.dataTableName="#tblResult1";
+	tableObj1.getTableData="searchUser1";
+	tableObj1.displayIfNoData=false;
+	tableObj1.divTableData="#divtblResult1"
+	
+	searchFormObj=new EditForm();		
+		searchFormObj.editForm="#searchUser";
+		searchFormObj.idFieldName="id";
+		searchFormObj.getDataObjectForUI="getUser";
+		searchFormObj.getDropDownValue="getCategories";
+		//searchFormObj.datePickerList=["#startDate","#endDate"];
+		//searchFormObj.suggestionList=[
+		//								["#txtModel","model",1,true],
+		//								["#txtCustomer","customer",1,false],
+		//								["#txtDocType","docType",2,false],
+		//								["#txtDocNum","productNumber",2,false]
+		//							];		
+		searchFormObj.dataTableListObj=[tableObj,tableObj1];
+		//tableObj.hide();
+		//tableObj1.hide();
+		//$('#edit-container').load("admin_edit.html");
+	//searchFormObj.initiateForm();
+});
+
+</script>
+</head>
+
+<body>
+	<div class="bg-background">
+		<div class="main">
+			<div class="menu-header">
+				<ul class="menu">
+					<li><a href="searchData.html">Search Data</a></li>
+					<li class="selected"><a href="admin.jsp">Admin</a></li>
+				</ul>
+			</div>
+			<div style="clear: both; margin-top: 20px;"></div>			
+			
+			<div class="main-filter" >
+				<div class="tbl-result" id="divtblResult">
+					<table id="tblResult" class="display no-wrap">
+						<thead>
+							<tr>
+								<th width="0%" style="text-align: center;"></th>
+								<th data-priority="2" width="10%">User Name</th>
+								<th data-priority="1" width="25%">Full Name</th>
+								<th data-priority="5" width="20%">Email</th>
+								<th data-priority="6" width="10%">Type</th>
+								<th data-priority="5" width="5%">Status</th>
+								<th data-priority="6" width="20%">Address</th>	
+								<th data-priority="1" width="1%"></th>
+								<th data-priority="1" width="1%"></th>			
+								
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>			
+					</div>
+					<div class="button-control">
+						<button class="btn-action" id="btnAdd">
+							<span class="glyphicon glyphicon-plus"></span> ADD
+						</button>						
+					</div>
+				<div style="clear: both"></div>
+			</div>
+	<div class="loadingProcess"></div>
+	</div>
+	</div>
+</body>
+</html>

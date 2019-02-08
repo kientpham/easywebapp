@@ -1,0 +1,293 @@
+@font-face {
+    font-family: HelveticaNeue;
+    src: url(../fonts/HelveticaNeueLTStd-Roman.otf)format('opentype');
+}
+
+@font-face {
+    font-family: HelveticaNeueTh;
+    src: url(../fonts/HelveticaNeueLTStd-Th.otf)format('opentype');
+}
+
+@font-face {
+    font-family: HelveticaNeueLt;
+    src: url(../fonts/HelveticaNeueLTStd-Lt.otf)format('opentype');
+}
+
+@font-face {
+    font-family: HelveticaNeueMd;
+    src: url(../fonts/HelveticaNeueLTStd-Md.otf)format('opentype');
+}
+
+@font-face {
+    font-family: HelveticaNeueBlk;
+    src: url(../fonts/HelveticaNeueLTStd-Blk.otf)format('opentype');
+}
+
+/*============================
+Material Icons 2.2.0 release
+============================*/
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot) format('opentype'); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/*============================
+Typography
+============================*/
+.type-body {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 1rem;
+}
+
+.type-body.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 1rem;    
+}
+
+.type-body.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 1rem;    
+}
+
+.type-body.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 1rem;    
+}
+
+.type-body.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 1rem;    
+}
+
+.type-h1 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 3rem;    
+}
+
+.type-h1.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 3rem;
+}
+
+.type-h1.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 3rem;
+}
+
+.type-h1.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 3rem;
+}
+
+.type-h1.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 3rem;    
+}
+
+.type-h2 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 2.25rem;
+}
+
+.type-h2.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 2.25rem;
+}
+
+.type-h2.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 2.25rem;
+}
+
+.type-h2.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 2.25rem;
+}
+
+.type-h2.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 2.25rem;    
+}
+
+.type-h3 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 1.75rem;
+}
+
+.type-h3.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 1.75rem;
+}
+
+.type-h3.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 1.75rem;
+}
+
+.type-h3.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 1.75rem;
+}
+
+.type-h3.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 1.75rem;
+}
+
+.type-h4 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 1.5rem;
+}
+
+.type-h4.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 1.5rem;
+}
+
+.type-h4.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 1.5rem;
+}
+
+.type-h4.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 1.5rem;
+}
+
+.type-h4.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 1.5rem;
+}
+
+.type-h5 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: 1.125rem;
+}
+
+.type-h5.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: 1.125rem;
+}
+
+.type-h5.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: 1.125rem;
+}
+
+.type-h5.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: 1.125rem;
+}
+
+.type-h5.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: 1.125rem;
+}
+
+.type-h5a {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: .80rem;
+}
+
+.type-h5a.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: .80rem;
+}
+
+.type-h5a.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: .80rem;
+}
+
+.type-h5a.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: .80rem;
+}
+
+.type-h5a.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: .80rem;
+}
+
+.type-h6 {
+    font-family: 'HelveticaNeue', sans-serif; 
+    font-size: .75rem;
+}
+
+.type-h6.thin {
+    font-family: 'HelveticaNeueTh', sans-serif; 
+    font-size: .75rem;
+}
+
+.type-h6.light {
+    font-family: 'HelveticaNeueLt', sans-serif; 
+    font-size: .75rem;
+}
+
+.type-h6.med {
+    font-family: 'HelveticaNeueMd', sans-serif; 
+    font-size: .75rem;
+}
+
+.type-h6.blk {
+    font-family: 'HelveticaNeueBlk', sans-serif; 
+    font-size: .75rem;
+}
+
+/** Font sizes **/
+.fs12 {
+    font-size: 12px !important;
+}
+
+.fs13 {
+    font-size: 13px !important;
+}
+
+.fs14 {
+    font-size: 14px !important;
+}
+
+.fs15 {
+    font-size: 15px !important;
+}
+
+.fs18 {
+    font-size: 18px !important;
+}
+
+.fs20 {
+    font-size: 20px !important;
+}

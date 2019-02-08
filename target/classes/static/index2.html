@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Base Web Application</title>
+
+<link href="css/jquery.dataTables.min.css" rel="stylesheet"	type="text/css">
+<link href="css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="js/app/autodatabinding.js"></script>
+
+<script>
+
+var tableObj;
+$(document).ready(function() {
+	
+ 	var editFormObj=new EditForm();
+		editFormObj.idFieldName="id";
+		editFormObj.editForm="#myModal";
+		editFormObj.getDropDownValue="getAllCategories";
+		editFormObj.getValuesToBind="getUser";
+		editFormObj.getDataObjectForUI="getUser";
+		editFormObj.saveDataObject="addUser";
+		editFormObj.editFormHtml="admin_edit.html";
+		
+	tableObj= new TableClass();
+		tableObj.type=2;
+		tableObj.dataTableName="#tblResult";
+		tableObj.getTableData="getall";
+		tableObj.deleteController="deleteUsers";
+		tableObj.editFormObj=editFormObj;
+		tableObj.pageLength=4;		
+		tableObj.divTableData="#divResult";
+	
+	//tableObj.loadTable();	 
+	
+
+});
+
+</script>
+</head>
+
+<body>
+	<div class="bg-background">
+		<div class="main">
+			<div class="menu-header">
+				<ul class="menu">
+					<li><a href="searchData.html">Search Data</a></li>
+					<li class="selected"><a href="index.html">Admin</a></li>
+					<li><a href="/hello">Hello</a></li>
+				</ul>
+			</div>
+			<div style="clear: both; margin-top: 20px;"></div>
+			<div class="main-page">
+				<table id="tblResult" class="display responsive nowrap" >
+						<thead>
+							<tr>
+								<th  width="4%" style="text-align: center;"><input
+									type="checkbox" id="checkAll" /></th>
+								<th data-priority="2" width="10%">Bems ID</th>
+								<th data-priority="1" width="40%">Full Name</th>
+								<th data-priority="3" width="30%">Email</th>
+								<th data-priority="5" width="20%">Role</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						
+						</tbody>
+					</table>
+					<div id="divResult" class="tbl-result">
+				
+						<div class="button-control">
+							<button class="btn-action"
+								onclick="tableObj._editFormObj.openAddModel()">
+								<span class="glyphicon glyphicon-plus"></span> ADD
+							</button>
+							<button class="btn-action" id="btnDelete"
+								onclick="tableObj.openDeleteModel()">DELETE</button>
+						</div>
+					</div>
+		
+		
+		</div>
+			<div id="edit-container" class="modal-container"></div>
+
+			<!--Add new dialog  -->
+						<div class="modal fade" id="confirmationDialog" role="dialog">
+				<div class="modal-dialog modal-msg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" id="dialogTitle">Confirmation</h4>
+						</div>
+						<div class="modal-body alignCenter">
+							<div id="msgConfirmationContent" class="msgContent">							
+							       </div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn-action" id="btdYes" onclick="tableObj.deleteRecords()">Yes</button>
+							<button class="btn-action" data-dismiss="modal" onclick="cancelProcess()">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="informationDialog" role="dialog">
+				<div class="modal-dialog modal-msg">
+					<div>
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title" id="dialogTitle">Information</h4>
+							</div>
+							<div class="modal-body alignCenter">
+								<div id="msgContent" class="msgContent">							
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn-action" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<div class="loadingProcess"></div>
+</body>
+</html>
