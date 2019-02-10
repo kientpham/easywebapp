@@ -3082,6 +3082,7 @@ section {
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
+	 padding-bottom: 10px;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;
@@ -3096,6 +3097,7 @@ section {
 
 @media (max-width: 767px) {
     .overview-wrap {
+		padding-bottom: 5px;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -webkit-flex-direction: column;
@@ -4154,8 +4156,8 @@ section {
 .statistic-chart-1, .top-campaign, .chart-percent-2 {
     background: #fff;
     padding: 0 40px;
-    padding-top: 45px;
-    padding-bottom: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);

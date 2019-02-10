@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UrlController {
 
-	@GetMapping("/user_list")
+	@GetMapping("/index")
 	public String userList() {
 		
-		return "user_list";
+		return "index";
 	}
 }
