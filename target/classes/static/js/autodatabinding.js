@@ -498,14 +498,14 @@ function getDataColumn(numberOfColumns,data,type){
                  };  
 	    		dynamicColumns[n-1]= {"render" : function(data,type,item,meta) {				
 	    			var str =  item.id;
-	    			return '<a href="#" id="btnEdit" ><span class="glyphicon glyphicon-edit"></span></a>';
+	    			return '<div class="table-data-feature"><button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit"><i class="zmdi zmdi-edit"></i></button></div>';
 	    		},
 	    		sClass: "alignCenter",
 	    		"orderable": false
 	    		}
 	    		dynamicColumns[n]= {"render" : function(data,type,item,meta) {				
 	    			var str =  item.id;
-	    			return '<a href="#" id="btnEdit" ><span class="glyphicon glyphicon-remove"></span></a>';
+	    			return '<div class="table-data-feature"><button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Delete"><i class="zmdi zmdi-delete"></i></button></div>';
 	    		},
 	    		sClass: "alignCenter",
 	    		"orderable": false

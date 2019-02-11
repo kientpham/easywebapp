@@ -17,10 +17,8 @@
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
     <!-- Vendor CSS-->
     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
     <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
@@ -29,14 +27,9 @@
     <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
+	<link href="vendor/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-	
-	
-	
-
-
 </head>
 
 <body class="animsition">
@@ -451,19 +444,19 @@
 								<div class="top-campaign">	
 									<div class="overview-wrap">
 										<h3 class="title-3">User List</h3>
-										<button class="au-btn au-btn-icon au-btn--blue au-btn--small">
+										<button id="btnAdd" class="au-btn au-btn-icon au-btn--blue au-btn--small">
 											<i class="zmdi zmdi-plus"></i>add user</button>
 									</div>
 									<div id="divtblResult" class="table-responsive">
-										<table id="tblResult" class="table table-top-campaign">
+										<table id="tblResult" class="table display table-top-campaign">
 										   <thead>
 												<tr>
 													<th width="0%" style="text-align: center;"></th>
-													<th data-priority="2" width="10%">User Name</th>
+													<th data-priority="2" width="15%">User Name</th>
 													<th data-priority="1" width="25%">Full Name</th>
-													<th data-priority="5" width="20%">Email</th>
-													<th data-priority="6" width="10%">Type</th>
-													<th data-priority="5" width="5%">Status</th>
+													<th data-priority="5" width="15%">Email</th>
+													<th data-priority="6" width="5%">Type</th>
+													<th data-priority="5" width="10%">Status</th>
 													<th data-priority="6" width="20%">Address</th>	
 													<th data-priority="1" width="1%"></th>
 													<th data-priority="1" width="1%"></th>			
