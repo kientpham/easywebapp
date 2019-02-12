@@ -30,6 +30,9 @@ class TableClass{
 		set bFilter(value){
 			this._bFilter=value;
 		}
+		set bInfo(value){
+			this._bInfo=value;
+		}
 		set bPaginate(value){
 			this._bPaginate=value;
 		}
@@ -95,7 +98,7 @@ class TableClass{
 				},
 				success : function(data) {					
 					var rowDataSet = getDataRow(data);
-					var dynamicColumn=getDataColumn(numberOfColumns,data,type);
+					var dynamicColumn=getDataColumn(tableObj,numberOfColumns,data,type);
 					buildTable(tableObj,dynamicColumn,rowDataSet);
 				},
 				error: function(xhr, errorType, exception) {	
@@ -428,9 +431,7 @@ class EditForm{
 			        for(var key in columnsIn){
 			        	var control= document.getElementById(key);
 			        	if (control !=null){
-			        		//alert(control.nodeName);
-			        		if (control.nodeName ==="TABLE"){
-			        			alert(control.id);
+			        		if (control.nodeName ==="TABLE"){			        			
 			        			columnsIn[key]=getAllSelected(control.id);			   
 			        		}else{
 			        			columnsIn[key]=control.value;
@@ -471,7 +472,7 @@ class EditForm{
 //End of EditForm Class
 //--------------------------------------------
 
-function getDataColumn(numberOfColumns,data,type){
+function getDataColumn(tableObj,numberOfColumns,data,type){
 	var dynamicColumns=[];
 	dynamicColumns.length=numberOfColumns;		
 
@@ -496,16 +497,11 @@ function getDataColumn(numberOfColumns,data,type){
                  	"orderable": false,
                  	"visible":false
                  };  
-	    		dynamicColumns[n-1]= {"render" : function(data,type,item,meta) {				
-	    			var str =  item.id;
-	    			return '<div class="table-data-feature"><button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit"><i class="zmdi zmdi-edit"></i></button></div>';
-	    		},
-	    		sClass: "alignCenter",
-	    		"orderable": false
-	    		}
-	    		dynamicColumns[n]= {"render" : function(data,type,item,meta) {				
-	    			var str =  item.id;
-	    			return '<div class="table-data-feature"><button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Delete"><i class="zmdi zmdi-delete"></i></button></div>';
+	    		dynamicColumns[n]= {"render" : function(data,type,row) {				
+	    			return '<div class="table-data-feature">'
+	    			+'<button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit" onclick="tableObj._editFormObj.openEditModal('+row[0]+')" ><i class="zmdi zmdi-edit"></i></button>'
+	    			+'<button id="btnDelete" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="callDeleteDialog('+row[0]+',tableObj)"><i class="zmdi zmdi-delete"></i></button>'
+	    			+'</div>';
 	    		},
 	    		sClass: "alignCenter",
 	    		"orderable": false
@@ -514,8 +510,7 @@ function getDataColumn(numberOfColumns,data,type){
     		case "checkbox":
     			dynamicColumns[0]={
     				"render" : function(ddata, type, row ) {
-    					var id = row[0];
-    					//var isChecked=(row[n+1]===true) ? 'checked':'';
+    					var id = row[0];    				
     					return '<input type="checkbox" name="id[]" class="chkBox" '+row[n+1]+' id="'+ id +'" >';
     					},
     					"orderable": false
@@ -555,9 +550,12 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
 	var table=$(tableObj._tableId);    
     var bFilter =tableObj._bFilter;    
     var checkAllId=tableObj._checkAllId;
-        
+    var bInfo=tableObj._bInfo;
     if (bFilter==null){
     	bFilter=true;
+    }
+    if (bInfo==null){
+    	bInfo=true;
     }
     var bPaginate=tableObj._bPaginate;
     if (bPaginate==null){
@@ -578,28 +576,13 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
 	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 	"bAutoWidth": false,
 	"bFilter" : bFilter,
-	"bInfo" : true,	
+	"bInfo" : bInfo,	
     "aaData": rowDataSet,
     "aoColumns": dynamicColumns,
     "responsive": true,
     "retrieve": true
-    });   
+    });
     
-    var editFormObj= tableObj._editFormObj;
-	if(editFormObj!=null){
-		table.on('click', 'tr', function (evt) {			
-			var $cell=$(evt.target).closest('td');
-	    	if( $cell.index()==dynamicColumns.length-3){	        	
-	        	var data = table.DataTable().row( this ).data();	        	
-	        	editFormObj.openEditModal(data[0]);
-        	}
-	        if( $cell.index()==dynamicColumns.length-2){	        	
-	        	var data = table.DataTable().row( this ).data();
-	        	callDeleteDialog(data[0],tableObj);	        	
-        	}
-    	});	       
-	}	
-
 	dataTable.clear().draw();
 	dataTable.rows.add(rowDataSet).draw();
 	

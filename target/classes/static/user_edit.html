@@ -1,104 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script>
-	//var tableGroupObj;
-	$(document).ready(function() {
-		//editFormObj.loadAll			
-		//tableGroupObj.loadTable();	
-	})
-	</script>
 </head>
 <body>
-<form class="modal fade" name="user_edit" id="editModal" method="POST" role="dialog" data-backdrop="static">			
-				<div class="modal-dialog">
 
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title" id="dialogTitle">Add new user</h4>
-						</div>
-						
-						<div class="modal-body">
-							<input type="hidden" id="id" />
-						 <div class="row">
-							  <div class="column">
-								  <div class="row">
-									Username:					
-									<input id="username" type="text" required class="input-control w26"/>									
+	<form class="modal fade" name="user_edit" id="editModal" method="POST" role="dialog" data-backdrop="static">			
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="dialogTitle">Add new user</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>					
+				</div>						
+				<div class="au-card card-body card-block">
+					<input type="hidden" id="id" />
+					<div class="row">
+						<div class="col col-md-8">
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mb-1">User ID</label>	
 								</div>
-								<div class="row">
-									Password:									
-									<input id="password" type="text" class="input-control w26" />									
-								</div>						
-								<div class="row">
-									First Name:									
-									<input id="firstName" type="text" class="input-control w26" />									
+								<div class="col col-md-8">
+									<input id="username" type="text" required class="input-sm form-control-sm form-control"/>									
 								</div>
-								<div class="row">
-									Last Name:									
-									<input id="lastName" type="text" class="input-control w26" />									
-								</div>			
-								<div class="row">
-									Email:						
-									<input id="email" type="email" class="input-control w26" />									
+							</div>
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Password</label>	
 								</div>
-								<div class="row">
-									Type:<br>							
-									<select id="userType" name="cmbType" class="input-control w26">						
-									</select>									
+									<div class="col col-md-8">
+									<input id="password" type="text" class="input-sm form-control-sm form-control" />									
+								</div>								
+							</div>	
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">First Name</label>	
 								</div>
-								<div class="row">
-									Status: <br>
-									<select id="userStatus" name="cmbStatus" class="input-control w26">
-									</select>							
-								</div>			
-								
-								<div class="row" >
-									Address:									
-									<input id="address" class="width: 100%" />									
-								</div>	  
-							  </div>							  
-							  
-							<div class="column">			
-								<div class="tbl-result" id="divtblGroup">
-								<table id="tblUserGroup" class="display no-wrap">
+									<div class="col col-md-8">
+									<input id="firstName" type="text" class="input-sm form-control-sm form-control" />									
+								</div>								
+							</div>								
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Last Name</label>	
+								</div>
+									<div class="col col-md-8">
+									<input id="lastName" type="text" class="input-sm form-control-sm form-control" />									
+								</div>								
+							</div>								
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Email</label>	
+								</div>
+									<div class="col col-md-8">
+									<input id="email" type="email" class="input-sm form-control-sm form-control" />									
+								</div>								
+							</div>								
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Type</label>	
+								</div>
+									<div class="col col-md-4">
+									<select id="userType" name="cmbType" class="input-sm form-control-sm form-control">						
+									</select>
+								</div>								
+							</div>								
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Status</label>	
+								</div>
+									<div class="col col-md-4">
+									<select id="userStatus" name="cmbStatus" class="input-sm form-control-sm form-control">						
+									</select>
+								</div>								
+							</div>							
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1">Address</label>	
+								</div>
+									<div class="col col-md-8">
+									<input id="address" type="text" class="input-sm form-control-sm form-control" />									
+								</div>								
+							</div>																	  
+						</div>							  
+						<div class="col col-sm-4">			
+							<div class="tbl-result"  style="max-height:375px" id="divtblGroup">
+								<table id="tblUserGroup" class="display">
 									<thead>
 										<tr>
-											<th width="0%" style="text-align: center;"><input
-										type="checkbox" id="checkAllGroup"/></th>
-											<th data-priority="2" width="90%">Group Name</th>				
+											<th class="pr-2"><input
+												type="checkbox" id="checkAllGroup"/></th>
+											<th class="pr-2" width="90%">All Group</th>				
 										</tr>
 									</thead>
 									<tbody>
 									</tbody>
 								</table>			
-								</div>			
-							</div>		
-						</div> 					
-						
-						
-							<div class="row">
-								<div class="row-left">&nbsp;</div>
-								<div class="row-right">
-									<button class="btn-action" id="btnSave">Save</button>
-									<button type="button" class="btn-action" data-dismiss="modal">Cancel</button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="row-left">&nbsp;</div>
-								<div class="row-right">
-									<span id="message" style="color: red;"></span>
-								</div>
-							</div>
-						</div>
-						<input type="submit" class="hide">
-					
+							</div>			
+						</div>		
 					</div>
-
-				</div>			
-				</form>		
-	</body>
+					<div class="row d-flex justify-content-center">
+						<button class="btn btn-primary m-2" id="btnSave">Save</button>
+						<button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Cancel</button>						
+					</div>
+					<div class="row">
+						<div class="row-left">&nbsp;</div>
+						<div class="row-right">
+							<span id="message" style="color: red;"></span>
+						</div>
+					</div>
+				</div>
+				<input type="submit" value="&nbsp;" class="hide">					
+			</div>
+		</div>
+	</form>		
+	
+</body>
 </html>			
 				

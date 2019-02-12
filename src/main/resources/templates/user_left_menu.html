@@ -452,14 +452,13 @@
 										   <thead>
 												<tr>
 													<th width="0%" style="text-align: center;"></th>
-													<th data-priority="2" width="15%">User Name</th>
-													<th data-priority="1" width="25%">Full Name</th>
+													<th data-priority="1" width="15%">User Name</th>
+													<th data-priority="2" width="25%">Full Name</th>
 													<th data-priority="5" width="15%">Email</th>
-													<th data-priority="6" width="5%">Type</th>
-													<th data-priority="5" width="10%">Status</th>
+													<th data-priority="6" width="7%">Type</th>
+													<th data-priority="5" width="7%">Status</th>
 													<th data-priority="6" width="20%">Address</th>	
-													<th data-priority="1" width="1%"></th>
-													<th data-priority="1" width="1%"></th>			
+													<th data-priority="1" width="1%">Action</th>									
 													
 												</tr>
 											</thead>
@@ -467,6 +466,7 @@
 												
 											</tbody>
 										</table>
+										
 									</div>
 								</div>	
                             </div>                    
@@ -475,7 +475,7 @@
 					   <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
-                                    <p>Copyright © 2018 Kien Pham. All rights reserved</a>.</p>
+                                    <p>Copyright © 2019 Kien Pham. All rights reserved</a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -510,12 +510,11 @@
     <script src="vendor/select2/select2.min.js"></script>
 	<!--<script type="text/javascript" src="vendor/jquery.min.js"></script>-->
 	<script src="js/main.js"></script>	
+    <!-- Main JS-->
+    
 	<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
 	<script type="text/javascript" src="js/autodatabinding.js"></script>
-    <!-- Main JS-->
-    
-
 	<script>
 		var searchFormObj;
 		var tableObj;
@@ -551,7 +550,7 @@
 			tableObj.tableId="#tblResult";
 			tableObj.getTableData="getUserDataTable";
 			tableObj.buttonAddId="#btnAdd";	
-			tableObj.numberOfColumns=9;			
+			tableObj.numberOfColumns=8;			
 			tableObj.loadTable();	
 		});
 

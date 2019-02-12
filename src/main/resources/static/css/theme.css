@@ -152,6 +152,11 @@ strong {
     font-weight: 700;
 }
 
+.hide {
+	display: none;
+}
+
+
 /*-----------------------------------------------------*/
 /*                   ELEMENTS                          */
 /*-----------------------------------------------------*/
@@ -274,7 +279,9 @@ section {
 
 /*Page Objects*/
 .page-wrapper {
-    overflow: hidden;
+    
+	 min-height: 100vh;
+	 background: #f7f7f7;
 }
 
 .page-container {
@@ -319,6 +326,7 @@ section {
 
 .page-content--bgf7 {
     background: #f7f7f7;
+	
 }
 
 .page-content--bge5 {
@@ -741,6 +749,10 @@ section {
     color: #808080;
 }
 
+.au-input--w200 {
+    min-width: 200px;
+}
+
 .au-input--w300 {
     min-width: 300px;
 }
@@ -944,7 +956,7 @@ section {
 .rs-select2--light .select2-container--open .select2-dropdown,
 .rs-select2--trans .select2-container--open .select2-dropdown {
     font-size: 14px;
-    box-shadow: 0px 2px 15px 3px rgba(0,0,0,0.1);
+    box-shadow: 1px 2px 15px 3px rgba(0,0,0,0.3);
     border-radius: 4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -4157,7 +4169,7 @@ section {
     background: #fff;
     padding: 0 40px;
     padding-top: 25px;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
@@ -4187,8 +4199,8 @@ section {
 }
 
 .top-campaign {
-    padding-bottom: 97px;
-    margin-bottom: 40px;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .chart-percent-2 {
@@ -4575,7 +4587,7 @@ section {
 }
 
 .table-data__tool .table-data__tool-right > button {
-    margin-right: 12px;
+    margin-right: 0px;
 }
 
 @media (max-width: 991px) {
@@ -4733,7 +4745,7 @@ section {
 /* ----- Footer ----- */
 .copyright {
     text-align: center;
-    padding: 60px 0;
+    padding: 10px 0;
     padding-top: 20px;
 }
 
@@ -4778,6 +4790,7 @@ section {
     display: -moz-box;
     display: -ms-flexbox;
     display: flex;
+	padding-top: 20px;
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     -moz-box-pack: justify;

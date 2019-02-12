@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UrlController {
 
-	@GetMapping("/index")
-	public String userList() {
+	@GetMapping("/userleftmenu")
+	public String userLeftMenu() {
 		
-		return "index";
+		return "user_left_menu";
+	}
+	
+	@GetMapping("/usertopmenu")
+	public String userTopMenu() {		
+		return "user_top_menu";
 	}
 }
