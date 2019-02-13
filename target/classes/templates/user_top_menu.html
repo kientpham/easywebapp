@@ -33,6 +33,7 @@
 	<link href="vendor/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+	<link href="css/style.css" rel="stylesheet" media="all" type="text/css">
 
 </head>
 
@@ -503,32 +504,39 @@
 
         <!-- PAGE CONTENT-->
         <div class="page-content--bgf7">
-            <!-- BREADCRUMB-->
+            <!-- BREADCRUMB-->            
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="au-breadcrumb-content">
+							<div class="au-breadcrumb-left">
+								<span class="au-breadcrumb-span">You are here:</span>
+								<ul class="list-unstyled list-inline au-breadcrumb__list">
+									<li class="list-inline-item active">
+										<a href="#">Home</a>
+									</li>
+									<li class="list-inline-item seprate">
+										<span>/</span>
+									</li>
+									<li class="list-inline-item">Dashboard</li>
+								</ul>
+							</div>
+					 
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- END BREADCRUMB-->  
+			
+			<div class="container">
+				<div id="alertDiv" class="fixed maw400 hide alert au-alert-success alert-dismissible au-alert au-alert--70per" role="alert">
+					<i class="zmdi zmdi-check-circle"></i>
+					<span class="content">Saved successfully!</span>					
+				</div>
+				<!-- END ALERT-->
+			</div> 
             
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="au-breadcrumb-content">
-                                <div class="au-breadcrumb-left">
-                                    <span class="au-breadcrumb-span">You are here:</span>
-                                    <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                        <li class="list-inline-item active">
-                                            <a href="#">Home</a>
-                                        </li>
-                                        <li class="list-inline-item seprate">
-                                            <span>/</span>
-                                        </li>
-                                        <li class="list-inline-item">Dashboard</li>
-                                    </ul>
-                                </div>
-                         
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-            <!-- END BREADCRUMB-->    
-
             <!-- DATA TABLE-->
             <section class="p-t-20">
                 <div class="container">

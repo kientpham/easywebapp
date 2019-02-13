@@ -102,9 +102,8 @@ class TableClass{
 					buildTable(tableObj,dynamicColumn,rowDataSet);
 				},
 				error: function(xhr, errorType, exception) {	
-					alert(xhr.responseText);
-					
-					//showErrorMessage();
+					//alert(xhr.responseText);					
+					showErrorMessage();
 				},
 				complete: function() {					
 					$("body").removeClass("loading");					
@@ -121,15 +120,13 @@ class TableClass{
 				async: false,
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
-					
-					showInformationDialog("Message",data);
+					callAlert("Deleted successfully!");
 				},
 				error: function (jqXHR, exception) {
 					showErrorMessage();
 					return false;
 		        },
-				complete: function () {		
-									
+				complete: function () {										
 					$("body").removeClass("loading");
 				}
 			});			
@@ -142,8 +139,7 @@ class TableClass{
 			deleteRecord(selected, this._deleteController)
 		}
 		
-		saveRecord(){
-			
+		saveRecord(){			
 			if(this._editFormObj.saveRecord()){				
 				this.loadTable();	
 			}
@@ -154,15 +150,9 @@ class TableClass{
 			var allPages = $(this._tableId).DataTable().cells().nodes();
 			$(allPages).find('input[type="checkbox"]:checked').each(function() {
 			    selected.push($(this).attr('id'));
-			});
-			
+			});			
 			return selected;
 		}
-		
-		bindSelected(selectedId){
-			
-		}
-
 }
 //End of Table Class
 //-------------------------------------------
@@ -214,26 +204,20 @@ class EditForm{
 		this.openEditForm(recordId);
 	}
 	
-	openEditForm(recordId) {	
-		
-		this.initiateForm();
-		
+	openEditForm(recordId) {		
+		this.initiateForm();		
 		if (this._idFieldName==null){
 			this._idFieldName="id";
-		}
-		
-		this.bindValueToFields(this._idFieldName,this._getValuesToBind, recordId);
-		
+		}		
+		this.bindValueToFields(this._idFieldName,this._getValuesToBind, recordId);		
 		if (this._dataTableListObj!=null){
 			var jsonObj=this._idFieldName+'='+recordId;
 			this.loadAllTables(jsonObj);	
-		}	
-		
+		}			
 	}
 	
 	initiateForm(){
 		this.handleFormSubmit(this._editForm);	
-
 		if($(this._editForm).tagName=='Form'){			
 			this.handleFormSubmit(this._editForm);	
 		}		
@@ -411,7 +395,7 @@ class EditForm{
 			 return false;
 		 }
 		 var jsonObj=this.getDataObj(this._idFieldName,this._getValuesToBind);	 
-		 this.saveDataObj(this._editForm,jsonObj,this._saveDataObject);		 
+		 this.saveDataObj(this._editForm,jsonObj,this._saveDataObject);		 		 
 		 return true;
 	}
 	
@@ -455,12 +439,12 @@ class EditForm{
 	    		contentType : "application/json; charset=utf-8",	    		
 	    		async: false,
 	    		data: JSON.stringify(jsonObj),	    		
-	    		success : function(response) {	
-    				showInformationDialog("Message", response);
-    				$(editForm).modal("hide");		    		
-	    		},
+	    		success : function(response) {
+	    			$('.modal-backdrop').remove();
+	    			callAlert("Save succesfully!");	    		},
 	    		error: function (jqXHR, textStatus, errorThrown) {	
-	    			alert(errorThrown);  		    			    		    
+	    			//alert(errorThrown);  		    	
+	    			showErrorMessage();
 	    		},		
 	    		complete: function(data, textStatus, xhr) {		    		
 	    			$("body").removeClass("loading");
@@ -499,7 +483,7 @@ function getDataColumn(tableObj,numberOfColumns,data,type){
                  };  
 	    		dynamicColumns[n]= {"render" : function(data,type,row) {				
 	    			return '<div class="table-data-feature">'
-	    			+'<button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit" onclick="tableObj._editFormObj.openEditModal('+row[0]+')" ><i class="zmdi zmdi-edit"></i></button>'
+	    			+'<button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit" data-backdrop="false" onclick="tableObj._editFormObj.openEditModal('+row[0]+')" ><i class="zmdi zmdi-edit"></i></button>'
 	    			+'<button id="btnDelete" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="callDeleteDialog('+row[0]+',tableObj)"><i class="zmdi zmdi-delete"></i></button>'
 	    			+'</div>';
 	    		},
@@ -646,8 +630,7 @@ function callDeleteDialog(id,tableObj){
 	doModal("confirmModal","Confirmation","Are you sure to delete this record?","Confirm");
 	if ($("#btnSubmit")!=null){
 		$("#btnSubmit").off("click");	
-		$("#btnSubmit").click({id:id,tableObj:tableObj},function(event){		
-			
+		$("#btnSubmit").click({id:id,tableObj:tableObj},function(event){			
 			var listId=[];
 			listId.push(event.data.id);
 			event.data.tableObj.deleteRecord(listId);
@@ -656,13 +639,23 @@ function callDeleteDialog(id,tableObj){
 	}	
 }
 
+function callAlert(message){
+	html ='<i class="zmdi zmdi-check-circle"></i>';
+	html += '<span class="content">'+message +'</span>';
+	$("#alertDiv").html(html);
+	$("#alertDiv").toggle("fast");
+	setTimeout(function(){
+	    		    $("#alertDiv").toggle("fast");
+			  }, 2000);
+}
+
 function doModal(divId, heading, formContent,btnText) {
     html =  '<div id='+divId +' class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
     html += '<div class="modal-dialog">';
     html += '<div class="modal-content">';
-    html += '<div class="modal-header">';
-    html += '<a class="close" data-dismiss="modal">×</a>';
-    html += '<h4>'+heading+'</h4>'
+    html += '<div class="modal-header">';    
+    html += '<h4 class="modal-title">'+heading+'</h4>'
+    html += '<button type="button" class="close" data-dismiss="modal">&times;</button>';
     html += '</div>';
     html += '<div class="modal-body" align="center">';
     html += formContent;

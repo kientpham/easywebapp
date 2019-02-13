@@ -3,7 +3,6 @@
 <head>
 </head>
 <body>
-
 	<form class="modal fade" name="user_edit" id="editModal" method="POST" role="dialog" data-backdrop="static">			
 		<div class="modal-dialog modal-lg">
 			<!-- Modal content-->
@@ -12,79 +11,79 @@
 					<h4 class="modal-title" id="dialogTitle">Add new user</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>					
 				</div>						
-				<div class="au-card card-body card-block">
+				<div class="au-card card-body card-block container" >
 					<input type="hidden" id="id" />
 					<div class="row">
 						<div class="col col-md-8">
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="form-control-label mb-1">User ID</label>	
+									<label class="form-control-label mw100">User ID</label>	
 								</div>
 								<div class="col col-md-8">
-									<input id="username" type="text" required class="input-sm form-control-sm form-control"/>									
+									<input id="username" autofocus type="text" required class="input-sm form-control-sm form-control mw200"/>									
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Password</label>	
+									<label class="control-label mb-1 mw100" >Password</label>	
 								</div>
 									<div class="col col-md-8">
-									<input id="password" type="text" class="input-sm form-control-sm form-control" />									
+									<input id="password" type="text" class="mw200 input-sm form-control-sm form-control" />									
 								</div>								
 							</div>	
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">First Name</label>	
+									<label class="control-label mb-1 mw100">First Name</label>	
 								</div>
 									<div class="col col-md-8">
-									<input id="firstName" type="text" class="input-sm form-control-sm form-control" />									
+									<input id="firstName" type="text" class="mw200 input-sm form-control-sm form-control" />									
 								</div>								
 							</div>								
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Last Name</label>	
+									<label class="control-label mb-1 mw100">Last Name</label>	
 								</div>
 									<div class="col col-md-8">
-									<input id="lastName" type="text" class="input-sm form-control-sm form-control" />									
+									<input id="lastName" type="text" class="mw200 input-sm form-control-sm form-control" />									
 								</div>								
 							</div>								
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Email</label>	
+									<label class="control-label mb-1 mw100">Email</label>	
 								</div>
 									<div class="col col-md-8">
-									<input id="email" type="email" class="input-sm form-control-sm form-control" />									
+									<input id="email" type="email" class="mw200 input-sm form-control-sm form-control" />									
 								</div>								
 							</div>								
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Type</label>	
+									<label class="control-label mb-1 mw100">Type</label>	
 								</div>
 									<div class="col col-md-4">
-									<select id="userType" name="cmbType" class="input-sm form-control-sm form-control">						
+									<select id="userType" name="cmbType" class="mw200 input-sm form-control-sm form-control">						
 									</select>
 								</div>								
 							</div>								
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Status</label>	
+									<label class="control-label mb-1 mw100">Status</label>	
 								</div>
 									<div class="col col-md-4">
-									<select id="userStatus" name="cmbStatus" class="input-sm form-control-sm form-control">						
+									<select id="userStatus" name="cmbStatus" class="mw200 input-sm form-control-sm form-control">						
 									</select>
 								</div>								
 							</div>							
 							<div class="row form-group">
 								<div class="col col-sm-3">
-									<label class="control-label mb-1">Address</label>	
+									<label class="control-label mb-1 mw100">Address</label>	
 								</div>
 									<div class="col col-md-8">
-									<input id="address" type="text" class="input-sm form-control-sm form-control" />									
+									<input id="address" type="text" class="mw200 input-sm form-control-sm form-control" />									
 								</div>								
 							</div>																	  
 						</div>							  
 						<div class="col col-sm-4">			
-							<div class="tbl-result"  style="max-height:375px" id="divtblGroup">
+							<div class="mw150 mh350" id="divtblGroup">
 								<table id="tblUserGroup" class="display">
 									<thead>
 										<tr>
