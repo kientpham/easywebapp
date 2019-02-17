@@ -63,7 +63,8 @@ class TableClass{
 			$(this._divTableData).addClass("hide");
 		}
 		
-		loadTable(){				
+		loadTable(){	
+			
 			if($('iconloading')!=null ){
 				 $('body').append('<div class="loadingProcess" id="iconloading"></div>');
 			}			
@@ -76,7 +77,8 @@ class TableClass{
 			
 			if(this._buttonAddId!=null){			
 					$(this._buttonAddId).click({editForm:this._editFormObj},callAddForm);
-			}			
+			}	
+		
 			this.callAjax(this);		
 		}	
 		
@@ -87,12 +89,12 @@ class TableClass{
 			var displayIfNoData=this._displayIfNoData;			
 			var numberOfColumns=this._numberOfColumns;
 			$.ajax({
-				type : "GET",
+				type : "POST",
 				url : getTableData, 
 				contentType : "application/json; charset=utf-8",
 				async: false,
 				dataType : "json",
-				data:jsonObj,// JSON.stringify(jsonObj),
+				data:JSON.stringify(jsonObj),
 				beforeSend : function() {					
 					$("body").addClass("loading");
 				},
@@ -102,7 +104,7 @@ class TableClass{
 					buildTable(tableObj,dynamicColumn,rowDataSet);
 				},
 				error: function(xhr, errorType, exception) {	
-					//alert(xhr.responseText);					
+					alert(xhr.responseText);					
 					showErrorMessage();
 				},
 				complete: function() {					
@@ -191,6 +193,12 @@ class EditForm{
 	set saveButtonId(value){
 		this._saveButtonId=value;
 	}
+	set dropdownList(value){
+		this._dropdownList=value;
+	}
+	set searchButton(value){
+		this._searchButton=value;
+	}	
 	
 	openAddModal(){	
 		
@@ -211,18 +219,20 @@ class EditForm{
 		}		
 		this.bindValueToFields(this._idFieldName,this._getValuesToBind, recordId);		
 		if (this._dataTableListObj!=null){
-			var jsonObj=this._idFieldName+'='+recordId;
+			//var jsonObj=this._idFieldName+'='+recordId;
+			var jsonObj=recordId;
 			this.loadAllTables(jsonObj);	
 		}			
 	}
 	
 	initiateForm(){
+		
 		this.handleFormSubmit(this._editForm);	
 		if($(this._editForm).tagName=='Form'){			
 			this.handleFormSubmit(this._editForm);	
 		}		
 		if(this._getDropDownValue!=null){
-			this.bindDropDownValue(this._getDropDownValue);
+			this.bindDropDownValue(this._getDropDownValue,this._dropdownList);
 		}		
 		if(this._datePickerList!=null){
 			this.bindDatePicker(this._datePickerList);
@@ -231,15 +241,20 @@ class EditForm{
 			this.bindSuggestion(this._suggestionList);
 		}			
 		if(this._saveButtonId!=null){
-			$(this._saveButtonId).attr('onClick', 'tableObj.saveRecord()');
+			$(this._saveButtonId[0]).attr('onClick', this._saveButtonId[1]+'.saveRecord()');
 		}
+		if(this._searchButton!=null){			
+			this.search();
+			$(this._searchButton[0]).attr('onClick', this._searchButton[1]+'.search()');
+		}
+		
 	}	
 	
 	search(){
-		if(!$(this._editForm)[0].reportValidity()){		    		
-			 return false;
-		 }
-		var jsonObj=this.getDataObj(this._idFieldName,this._getValuesToBind);
+//		if(!$(this._editForm)[0].reportValidity()){		    		
+//			 return false;
+//		}		
+		var jsonObj=this.getDataObj(this._idFieldName,this._getValuesToBind);	
 		this.loadAllTables(jsonObj);
 	}
 	
@@ -257,7 +272,14 @@ class EditForm{
 		  });
 	}
 	
-	bindDropDownValue(getDropDownValue){	
+	bindDropDownValue(getDropDownValue,dropdownList){		
+		for(var i=0;i<dropdownList.length;i++){
+			$('select[id$='+dropdownList[i][0] +'] > option').remove();		
+			if (dropdownList[i][2]==true){				
+				var dropdown = document.getElementById(dropdownList[i][0]);
+				$(dropdown).append('<option value=0>All</option>');
+			}
+		}
 		$.ajax({
 			type : "GET",
 			url : getDropDownValue, 
@@ -265,23 +287,18 @@ class EditForm{
 			dataType : "json",
 			success : function(response) {
 				var len = response.length;
-	            for(var i=0; i<len; i++){                
-	            	var controlid = response[i].categoryGroup;
-            	
-	            	var dropdown = document.getElementById(controlid);
-	            	if (dropdown!=null){
-	            		var ddloption =  dropdown.options;
-	            		var isExists = false;
-	            		for(var j = 0; j < ddloption.length; j++){            			
-	            			if(ddloption[j].value == response[i].id){            			 
-	            				isExists=true;            	
-	            				break;
-	            		    }
+	            for(var i=0; i<len; i++){	            	
+	            	var catGroup = response[i].categoryGroup;
+	            	var dropdownLen = dropdownList.length;
+	            	for (var j=0;j<dropdownLen;j++){
+	            		if (dropdownList[j][1]==catGroup){
+	            			var controlid=dropdownList[j][0];
+	            			var dropdown = document.getElementById(controlid);
+	    	            	if (dropdown!=null){
+	    	            		$(dropdown).append('<option value="' + response[i].id + '">' + response[i].value + '</option>');
+	    	            	}	            			
 	            		}
-	            		if (isExists===false){
-	            			$(dropdown).append('<option value="' + response[i].id + '">' + response[i].value + '</option>');
-	            		}
-	            	}
+	            	}            	
 	            }
 			},				
 			error: function(event, status, xhr) {		
@@ -366,8 +383,7 @@ class EditForm{
 			beforeSend : function() {
 				$("body").addClass("loading");
 			},
-			success : function(result) {	
-				
+			success : function(result) {					
 				 var columnsIn = result;			 
 			        for(var key in columnsIn){		 
 			        	var control= document.getElementById(key);
@@ -412,9 +428,9 @@ class EditForm{
 				$("body").addClass("loading");
 			},
 			success : function(columnsIn) {	 
-			        for(var key in columnsIn){
+			        for(var key in columnsIn){			        	
 			        	var control= document.getElementById(key);
-			        	if (control !=null){
+			        	if (control !=null){			        		
 			        		if (control.nodeName ==="TABLE"){			        			
 			        			columnsIn[key]=getAllSelected(control.id);			   
 			        		}else{
@@ -546,9 +562,9 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
     	bPaginate=true;
     }
     var order=tableObj._order;
-    var ordering =false;
+    var ordering =true;
     if(order!=null){
-    	ordering=true;    	
+    	ordering=false;    	
     }else {
     	order=1;
     }    
@@ -677,6 +693,31 @@ function doModal(divId, heading, formContent,btnText) {
     $('#'+divId).on('hidden.bs.modal', function (e) {
         $(this).remove();
     });
+}
+
+function loadHtml(divAndHtmlList){		
+	for (var i=0;i< divAndHtmlList.length;i++){	
+		$('#'+divAndHtmlList[i][0]).load(divAndHtmlList[i][1]);
+	}	
+}
+
+function createBreadcrumb(breadcrumbDiv, itemAndLinkList){
+	var html='<div class="row">';
+	html +='<div class="col-md-12">';
+	html +='<div class="au-breadcrumb-content">';
+	html +='<div class="au-breadcrumb-left">'
+	html +='<span class="au-breadcrumb-span">You are here:</span>';
+	html +='<ul class="list-unstyled list-inline au-breadcrumb__list">';
+	var n=itemAndLinkList.length-1;	
+	for (var i=0;i<n ;i++){
+		html +='<li class="list-inline-item active">';
+		html += '<a href="'+itemAndLinkList[i][1] +'">'+ itemAndLinkList[i][0] + '</a>';
+		html +='</li>';
+		html +='<li class="list-inline-item seprate"><span>/</span></li>';		
+	}			
+	html +='<li class="list-inline-item">'+ itemAndLinkList[n][0] +'</li>';
+	html +='</ul></div></div></div></div>';	
+	$('#'+breadcrumbDiv).html(html);	
 }
 
 $(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {

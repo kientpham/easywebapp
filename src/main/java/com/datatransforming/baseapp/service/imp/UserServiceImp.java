@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.datatransforming.baseapp.entity.Group;
 import com.datatransforming.baseapp.entity.User;
 import com.datatransforming.baseapp.presenter.UserPresenter;
+import com.datatransforming.baseapp.presenter.input.UserSearch;
 import com.datatransforming.baseapp.presenter.ouput.GroupListJoinUser;
 import com.datatransforming.baseapp.presenter.ouput.UserDataTable;
 import com.datatransforming.baseapp.presenter.ouput.UserEdit;
@@ -28,8 +29,8 @@ public class UserServiceImp implements UserService{
 	private GroupRepository groupRepository;
 	
 	@Override
-	public List<UserDataTable> getUserList() {					
-		return presenter.getUserDataTable((List<User>) userRepository.findAll());
+	public List<UserDataTable> getUserList(UserSearch user) {					
+		return presenter.getUserDataTable((List<User>) userRepository.findTop20ByOrderByFirstNameAsc());
 	}
 
 	@Override
