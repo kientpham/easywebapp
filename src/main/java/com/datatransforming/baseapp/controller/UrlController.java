@@ -16,4 +16,12 @@ public class UrlController {
 	public String userTopMenu() {		
 		return "user_top_menu";
 	}
+	
+	@GetMapping("/test")
+	public String test() {		
+		return "index1";
+	}
+	
+	
+	
 }

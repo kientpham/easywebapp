@@ -2,6 +2,8 @@ package com.datatransforming.baseapp.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +31,13 @@ public class UserServiceImp implements UserService{
 	private GroupRepository groupRepository;
 	
 	@Override
-	public List<UserDataTable> getUserList(UserSearch user) {					
-		return presenter.getUserDataTable((List<User>) userRepository.findTop20ByOrderByFirstNameAsc());
+	public List<UserDataTable> getUserList(UserSearch user) {		
+		if (user.getUserStatusSearch()==0 && user.getName()==Strings.EMPTY) {
+			return presenter.getUserDataTable((List<User>) userRepository.findTop20ByOrderByFirstNameAsc());	
+		}else {
+			return null;
+		}
+		
 	}
 
 	@Override

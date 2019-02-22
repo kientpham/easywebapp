@@ -8,49 +8,37 @@
 	type="text/css">
 <link href="css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/jquery.min.js"></script>
+<script type="text/javascript" src="vendor/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="vendor/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="js/app/autodatabinding.js"></script>
+<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="js/autodatabinding.js"></script>
 
 <script>
 
 var tableObj;
 $(document).ready(function() {	
-	//div.container { max-width: 1200px }
- 	var editFormObj=new EditForm();
-		editFormObj.idFieldName="id";
-		editFormObj.editForm="#myModal";
-		editFormObj.getDropDownValue="getAllCategories";
-		editFormObj.getValuesToBind="getUser";
-		editFormObj.getDataObjectForUI="getUser";
-		editFormObj.saveDataObject="addUser";
-		editFormObj.editFormHtml="admin_edit.html";
-		
-	tableObj= new TableClass();
-		tableObj.type=2;
-		tableObj.dataTableName="#tblResult";
-		tableObj.getTableData="getall";
-		tableObj.deleteController="deleteUsers";
-		tableObj.editFormObj=editFormObj;
-		tableObj.pageLength=4;		
-		tableObj.divTableData="#divResult";
-	
-	//tableObj.loadTable();	 
 	
 		 $('#example').DataTable( {
-		        "ajax": "../../../../examples/objects.txt",
+			  	"processing": true,
+		        "serverSide": true,
+		        "pageLength": 2,		     
+		       // "ajax": "paginated",//../../../../examples/objects.txt",
 		        "columns": [
-		            { "data": "name" },
-		            { "data": "position" },
-		            { "data": "office" },
-		            { "data": "extn" },
-		            { "data": "start_date" },
-		            { "data": "salary" }
-		        ]
+		        	  { "data": "id" },
+		                { "data": "name" },
+		                { "data": "age" }
+		        	],
+				   "ajax": {
+		               "url": "/paginated",
+		               "type": "POST",
+		               "contentType" : "application/json; charset=utf-8",			    
+		               "data": function ( d ) {
+		                   return JSON.stringify(d); // NOTE: you also need to stringify POST payload
+		               }
+		           }
 		    } );
 });
 
@@ -74,33 +62,20 @@ $(document).ready(function() {
 						<table id="example" class="display responsive nowrap" style="width:100%">
 					        <thead>
 					            <tr>
+				                	 <th>ID</th>
 					                <th>Name</th>
-					                <th>Position</th>
-					                <th>Office</th>
-					                <th>Extn.</th>
-					                <th>Start date</th>
-					                <th>Salary</th>
+					                <th>Age</th>
 					            </tr>
 					        </thead>
 					        <tfoot>
 					            <tr>
+					                 <th>ID</th>
 					                <th>Name</th>
-					                <th>Position</th>
-					                <th>Office</th>
-					                <th>Extn.</th>
-					                <th>Start date</th>
-					                <th>Salary</th>
+					                <th>Age</th>
 					            </tr>
 					        </tfoot>
 					    </table>
-						<div class="button-control">
-							<button class="btn-action"
-								onclick="tableObj._editFormObj.openAddModel()">
-								<span class="glyphicon glyphicon-plus"></span> ADD
-							</button>
-							<button class="btn-action" id="btnDelete"
-								onclick="tableObj.openDeleteModel()">DELETE</button>
-						</div>
+				
 					</div>
 		
 		
@@ -121,8 +96,7 @@ $(document).ready(function() {
 							       </div>
 						</div>
 						<div class="modal-footer">
-							<button class="btn-action" id="btdYes" onclick="tableObj.deleteRecords()">Yes</button>
-							<button class="btn-action" data-dismiss="modal" onclick="cancelProcess()">No</button>
+						
 						</div>
 					</div>
 				</div>
