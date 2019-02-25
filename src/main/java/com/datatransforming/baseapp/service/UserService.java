@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.datatransforming.baseapp.presenter.input.PaginationCriteria;
+import com.datatransforming.baseapp.presenter.input.TablePage;
 import com.datatransforming.baseapp.presenter.input.UserSearch;
 import com.datatransforming.baseapp.presenter.ouput.GroupListJoinUser;
 import com.datatransforming.baseapp.presenter.ouput.UserDataTable;
@@ -21,4 +23,6 @@ public interface UserService {
 	public String deleteUsers(List<Integer> ids);
 		
 	public List<GroupListJoinUser> getGroupListJoinUser(Integer userId);
+	
+	public TablePage getUsersListAjax(PaginationCriteria paginationCriteria); 
 }

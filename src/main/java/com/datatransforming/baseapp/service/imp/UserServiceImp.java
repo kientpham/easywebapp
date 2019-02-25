@@ -2,14 +2,18 @@ package com.datatransforming.baseapp.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.datatransforming.baseapp.entity.Group;
 import com.datatransforming.baseapp.entity.User;
 import com.datatransforming.baseapp.presenter.UserPresenter;
+import com.datatransforming.baseapp.presenter.input.PaginationCriteria;
+import com.datatransforming.baseapp.presenter.input.TablePage;
 import com.datatransforming.baseapp.presenter.input.UserSearch;
 import com.datatransforming.baseapp.presenter.ouput.GroupListJoinUser;
 import com.datatransforming.baseapp.presenter.ouput.UserDataTable;
@@ -38,6 +42,16 @@ public class UserServiceImp implements UserService{
 			return null;
 		}
 		
+	}
+	
+	@Override
+	public TablePage getUsersListAjax(PaginationCriteria paginationCriteria) {		
+		List<User> userList= (List<User>) userRepository.findAll();
+		List<User> filteredUser= (userList).stream()
+				.filter(u -> u.getFirstName().contains(paginationCriteria.getSearch().getValue()))
+				.collect(Collectors.toList()).subList(paginationCriteria.getStart(), paginationCriteria.getStart() + paginationCriteria.getLength());
+		//List<User> filteredUser= userList.subList(paginationCriteria.getStart(), paginationCriteria.getStart() + paginationCriteria.getLength());
+		return presenter.buildTablePage(userList, filteredUser, paginationCriteria);		
 	}
 
 	@Override

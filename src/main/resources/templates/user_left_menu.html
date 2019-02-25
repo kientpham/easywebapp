@@ -33,7 +33,7 @@
 	<link href="css/style.css" rel="stylesheet" media="all">
 </head>
 
-<body class="animsition">
+<body >
     <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
@@ -496,9 +496,10 @@
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
+    <!-- <script src="vendor/slick/slick.min.js">
+    </script>     
+     <script src="vendor/wow/wow.min.js"></script> -->
+    
     <script src="vendor/animsition/animsition.min.js"></script>
     <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
     </script>
@@ -507,7 +508,7 @@
     </script>
     <script src="vendor/circle-progress/circle-progress.min.js"></script>
     <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+  <!--   <script src="vendor/chartjs/Chart.bundle.min.js"></script> -->
     <script src="vendor/select2/select2.min.js"></script>
 	<!--<script type="text/javascript" src="vendor/jquery.min.js"></script>-->
 	<script src="js/main.js"></script>	
@@ -549,7 +550,7 @@
 			tableObj.deleteController="deleteUsers";
 			tableObj.editFormObj=editFormObj;		
 			tableObj.tableId="#tblResult";
-			tableObj.getTableData="getUserDataTable";
+			tableObj.getTableData="/user_paginated";
 			tableObj.buttonAddId="#btnAdd";	
 			tableObj.numberOfColumns=8;			
 			tableObj.loadTable();	

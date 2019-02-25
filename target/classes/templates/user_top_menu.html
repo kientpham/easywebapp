@@ -31,7 +31,7 @@
 	<link href="css/style.css" rel="stylesheet" media="all" type="text/css">
 </head>
 
-<body class="animsition">
+<body >
     <div class="page-wrapper">        
 		<div id="headerDiv"></div>		
         <!-- PAGE CONTENT-->
@@ -109,17 +109,17 @@
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
     <!-- Main JS-->
-    <script src="js/main.js"></script>	
+    <script type="text/javascript" src="js/main.js"></script>	
 	<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
 	<script type="text/javascript" src="js/autodatabinding.js"></script>
 	<script>
 		var searchFormObj;
-		var tableObj;
+		var tableObj1;
 		var editFormObj;
 		$(document).ready(function() {	
 				
-			var divAndHtml = new Array ( );
+		 	var divAndHtml = new Array ( );
 			divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
 			divAndHtml[1] = new Array ( 'divCopyright', 'copyright.html');		
 			divAndHtml[2] = new Array ( 'divAlert', 'alert.html');				
@@ -152,24 +152,24 @@
 			editFormObj.getValuesToBind="getUser";
 			editFormObj.saveDataObject="addUser";
 			editFormObj.editFormHtml="user_edit.html";
-			editFormObj.saveButtonId=['#btnSave','tableObj'];
-			editFormObj.dataTableListObj=[tableGroupObj];
+			editFormObj.saveButtonId=['#btnSave','tableObj1'];
+			editFormObj.dataTableListObj=[tableGroupObj]; 
+						
+			tableObj1= new TableClass();
+			tableObj1.type="edit";
+			tableObj1.bFilter=false;
+			tableObj1.bPaginate=false;
+			tableObj1.bInfo=false;
+			tableObj1.order=2;
+			tableObj1.deleteController="deleteUsers";
+			tableObj1.editFormObj=editFormObj;		
+			tableObj1.tableId="#tblResult";
+			tableObj1.getTableData="/user_paginated";
+			tableObj1.buttonAddId="#btnAdd";	
+			tableObj1.numberOfColumns=8;			
+			tableObj1.loadTable();		
 			
-			tableObj= new TableClass();
-			tableObj.type="edit";
-			tableObj.bFilter=false;
-			tableObj.bPaginate=false;
-			tableObj.bInfo=false;
-			tableObj.order=2;
-			tableObj.deleteController="deleteUsers";
-			tableObj.editFormObj=editFormObj;		
-			tableObj.tableId="#tblResult";
-			tableObj.getTableData="getUserDataTable";
-			tableObj.buttonAddId="#btnAdd";	
-			tableObj.numberOfColumns=8;			
-			//tableObj.loadTable();		
-			
-			var dropdownListSearch = new Array ( );
+ 			var dropdownListSearch = new Array ( );
 			dropdownListSearch[0] = new Array ( 'userStatusSearch', 'userStatus',true);			
 			
 			searchFormObj=new EditForm();
@@ -178,9 +178,9 @@
 			searchFormObj.searchButton=['#searchButton','searchFormObj'];
 			searchFormObj.getDropDownValue="getAllCategories";
 			searchFormObj.getValuesToBind="getUserSearchForm";
-			searchFormObj.dataTableListObj=[tableObj];
-			searchFormObj.dropdownList=dropdownListSearch;
-			searchFormObj.initiateForm();
+			searchFormObj.dataTableListObj=[tableObj1];
+			searchFormObj.dropdownList=dropdownListSearch; 
+			//searchFormObj.initiateForm();
 		});
 	</script>
 </body>

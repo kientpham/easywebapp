@@ -8,41 +8,7 @@
 	type="text/css">
 <link href="css/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
 
-<script type="text/javascript" src="vendor/jquery.min.js"></script>
-<script type="text/javascript" src="vendor/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="vendor/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
-<script type="text/javascript" src="js/autodatabinding.js"></script>
-
-<script>
-
-var tableObj;
-$(document).ready(function() {	
-	
-		 $('#example').DataTable( {
-			  	"processing": true,
-		        "serverSide": true,
-		        "pageLength": 2,		     
-		       // "ajax": "paginated",//../../../../examples/objects.txt",
-		        "columns": [
-		        	  { "data": "id" },
-		                { "data": "name" },
-		                { "data": "age" }
-		        	],
-				   "ajax": {
-		               "url": "/paginated",
-		               "type": "POST",
-		               "contentType" : "application/json; charset=utf-8",			    
-		               "data": function ( d ) {
-		                   return JSON.stringify(d); // NOTE: you also need to stringify POST payload
-		               }
-		           }
-		    } );
-});
-
-</script>
 </head>
 
 <body>
@@ -59,19 +25,31 @@ $(document).ready(function() {
 			<div class="main-page">
 				
 					<div id="divResult" class="tbl-result">
-						<table id="example" class="display responsive nowrap" style="width:100%">
+						<table id="tblResult" class="display responsive nowrap" style="width:100%">
 					        <thead>
 					            <tr>
-				                	 <th>ID</th>
-					                <th>Name</th>
-					                <th>Age</th>
+				                											<th width="0%" style="text-align: center;"></th>
+											<th data-priority="1" width="15%" style="text-align: left;">User ID</th>
+											<th data-priority="2" width="25%" style="text-align: left;">Full Name</th>
+											<th data-priority="5" width="15%" style="text-align: left;">Email</th>
+											<th data-priority="6" width="7%" style="text-align: left;">Type</th>
+											<th data-priority="5" width="7%" style="text-align: left;">Status</th>
+											<th data-priority="6" width="20%" style="text-align: left;">Address</th>	
+											<th data-priority="1" width="1%">Action</th>
+					                
 					            </tr>
 					        </thead>
 					        <tfoot>
 					            <tr>
-					                 <th>ID</th>
-					                <th>Name</th>
-					                <th>Age</th>
+					              											<th width="0%" style="text-align: center;"></th>
+											<th data-priority="1" width="15%" style="text-align: left;">User ID</th>
+											<th data-priority="2" width="25%" style="text-align: left;">Full Name</th>
+											<th data-priority="5" width="15%" style="text-align: left;">Email</th>
+											<th data-priority="6" width="7%" style="text-align: left;">Type</th>
+											<th data-priority="5" width="7%" style="text-align: left;">Status</th>
+											<th data-priority="6" width="20%" style="text-align: left;">Address</th>	
+											<th data-priority="1" width="1%">Action</th>
+					                
 					            </tr>
 					        </tfoot>
 					    </table>
@@ -123,5 +101,57 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="loadingProcess"></div>
+	
+	<script src="vendor/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="vendor/jquery.min.js"></script>
+<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="js/autodatabinding.js"></script>
+
+<script>
+
+
+$(document).ready(function() {	
+	var tableObj2;
+/* 		 $('#example').DataTable( {
+			  	"processing": true,
+		        "serverSide": true,
+		        "pageLength": 2,		     
+		       // "ajax": "paginated",//../../../../examples/objects.txt",
+		        "columns": [
+		        	  { "data": "id" },
+		                { "data": "name" },
+		                { "data": "age" }
+		        	],
+				   "ajax": {
+		               "url": "/paginated",
+		               "type": "POST",
+		               "contentType" : "application/json; charset=utf-8",			    
+		               "data": function ( d ) {
+		                   return JSON.stringify(d); // NOTE: you also need to stringify POST payload
+		               }
+		           }
+		    } ); */
+		    tableObj2= new TableClass();
+			tableObj2.type="edit";
+			tableObj2.bFilter=false;
+			tableObj2.bPaginate=false;
+			tableObj2.bInfo=false;
+			tableObj2.order=2;
+			tableObj2.deleteController="deleteUsers";
+			//tableObj2.editFormObj=editFormObj;		
+			tableObj2.tableId="#tblResult";
+			tableObj2.getTableData="/paginated";
+			//tableObj2.buttonAddId="#btnAdd";	
+			tableObj2.numberOfColumns=8;			
+			tableObj2.loadTable();		
+
+    
+});
+
+</script>
+	
 </body>
 </html>

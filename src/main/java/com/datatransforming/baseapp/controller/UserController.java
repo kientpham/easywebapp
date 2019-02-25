@@ -1,7 +1,10 @@
 package com.datatransforming.baseapp.controller;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,48 +33,72 @@ import com.datatransforming.baseapp.presenter.ouput.UserEdit;
 import com.datatransforming.baseapp.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 @RestController
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
-	private static final List<User> TEST_DATA = Arrays.asList(new User(1, "Lisa", 20), new User(2, "Tom", 31),
-			new User(3, "David", 38), new User(4, "Marco", 23), new User(5, "Jenny", 15));
-	 private ObjectMapper objectMapper = new ObjectMapper();
-	
-	@RequestMapping(value="/paginated", method=RequestMethod.POST)
+
+	private static final List<User> TEST_DATA = Arrays.asList(new User("1", "Lisa", "20"), new User("2", "Tom", "31"),
+			new User("3", "David", "38"), new User("4", "Marco", "23"), new User("5", "Jenny", "15"));
+	private ObjectMapper objectMapper = new ObjectMapper();
+
+	@RequestMapping(value = "/paginated", method = RequestMethod.POST)
 	@ResponseBody
 	public TablePage listUsersPaginated(@RequestBody PaginationCriteria paginationCriteria) {
-		 TablePage page = new TablePage();
-	        page.setDraw(paginationCriteria.getDraw());	       
+		TablePage page = new TablePage();
+		page.setDraw(paginationCriteria.getDraw());
 
-	        page.setRecordsTotal(TEST_DATA.size());	        
+		page.setRecordsTotal(TEST_DATA.size());
 
-	        page.setRecordsFiltered(TEST_DATA.size());//dataService.countFilteredEntries(paginationCriteria));	        
+		page.setRecordsFiltered(TEST_DATA.size());// dataService.countFilteredEntries(paginationCriteria));
 
-	        
-	        List<User> data = TEST_DATA.stream().filter(u->u.getName().contains(paginationCriteria.getSearch().getValue())).collect(Collectors.toList()).subList(paginationCriteria.getStart(), paginationCriteria.getStart()+2);
-	     
-	        List<Map<String, String>> records = new ArrayList<>(data.size());
-	        try {
-	            data.forEach(i -> {
-	                Map<String, Object> m = objectMapper.convertValue(i, Map.class);
-	                records.add(m.entrySet().stream()
-	                        .collect(Collectors.toMap(k -> k.getKey(), v -> v.getValue().toString())));
-	            });
-	  
-	        } catch (Exception e) {
-	      
-	        }  
-	        
-	        page.setData(records);
-	        
+		List<User> data = TEST_DATA.stream()
+				.filter(u -> u.getName().contains(paginationCriteria.getSearch().getValue()))
+				.collect(Collectors.toList()).subList(paginationCriteria.getStart(), paginationCriteria.getStart() + 4);
+
+		List<Map<String, String>> records = new ArrayList<>(data.size());
+		try {
+			 data.forEach(i -> {
+			 Map<String, Object> m = objectMapper.convertValue(i, Map.class);
+			 Map<String, Object> n =new HashMap<String, Object>();
+			 Iterator it=m.entrySet().iterator();
+			 int c=0;
+			 while (it.hasNext()) {
+				  Map.Entry pair = (Map.Entry)it.next();				  
+				 n.put(Integer.toString(c), pair.getValue().toString());
+				 c++;
+			 }
+			 
+			 records.add(n.entrySet().stream()
+			 .collect(Collectors.toMap(k -> k.getKey(), v -> v.getValue().toString())));
+			 // records.add(i, v -> v.getValue().toString());
+			 });			
+//			for (User user : data) {
+//				Map<String, String> m = new HashMap<String, String>();
+//				 m.put("0", user.getId());
+//				 m.put("1", user.getName());
+//				 m.put("2", user.getAge());
+//				records.add(m);
+//			}
+
+		} catch (Exception e) {
+
+		}
+
+		page.setData(records);
+
 		return page;
 	}
-	
-	
-	@RequestMapping(value="/getUserDataTable",method = RequestMethod.POST, produces = "application/json")
+
+	@RequestMapping(value = "/user_paginated", method = RequestMethod.POST)
+	@ResponseBody
+	public TablePage listUsers(@RequestBody PaginationCriteria paginationCriteria) {		
+		return userService.getUsersListAjax(paginationCriteria);
+	}
+
+	@RequestMapping(value = "/getUserDataTable", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public List<UserDataTable> getUserTable(@RequestBody UserSearch user) {
 		return userService.getUserList(user);
@@ -83,29 +110,27 @@ public class UserController {
 		ResponseEntity<UserEdit> entity = new ResponseEntity<UserEdit>(userService.getUserForEdit(id), HttpStatus.OK);
 		return entity;
 	}
-	
+
 	@RequestMapping(value = "/getUserSearchForm", method = RequestMethod.GET)
 	public ResponseEntity<UserSearch> getUserSearchForm(@RequestParam(value = "id") Integer id) {
 		ResponseEntity<UserSearch> entity = new ResponseEntity<UserSearch>(new UserSearch(), HttpStatus.OK);
 		return entity;
 	}
-	
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)  
-	  public ResponseEntity<String> addAccount(@RequestBody(required = true) UserEdit userEdit)
-	  {	    
-	    return new ResponseEntity<String>(userService.saveUser(userEdit),HttpStatus.OK);
-	  }
-	
-	 @RequestMapping(value = "/deleteUsers", method = RequestMethod.POST)
-	  public String deleteUsers(@RequestBody(required = true) List<Integer> ids)
-	  {
-		 return userService.deleteUsers(ids);
-	    //return "The accounts have been deleted successfully!";
-	  }
-	 	 
-	 @RequestMapping(value="/getGroupUserList", method = RequestMethod.POST)
-	 public List<GroupListJoinUser> getGroupListJoinUser(@RequestBody(required = true) int id){		 
-		 return userService.getGroupListJoinUser(id);
-	 }
+
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public ResponseEntity<String> addAccount(@RequestBody(required = true) UserEdit userEdit) {
+		return new ResponseEntity<String>(userService.saveUser(userEdit), HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/deleteUsers", method = RequestMethod.POST)
+	public String deleteUsers(@RequestBody(required = true) List<Integer> ids) {
+		return userService.deleteUsers(ids);
+		// return "The accounts have been deleted successfully!";
+	}
+
+	@RequestMapping(value = "/getGroupUserList", method = RequestMethod.POST)
+	public List<GroupListJoinUser> getGroupListJoinUser(@RequestBody(required = true) int id) {
+		return userService.getGroupListJoinUser(id);
+	}
 
 }

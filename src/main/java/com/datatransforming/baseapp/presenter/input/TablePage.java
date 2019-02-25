@@ -35,6 +35,8 @@ public class TablePage {
      * objects, one for each row, which will be used by DataTables.
      */
     private List<Map<String, String>> data;
+    
+    //private List<User> data;
 
     /**
      * If an error occurs during the running of the server-side processing script,

@@ -79,8 +79,37 @@ class TableClass{
 					$(this._buttonAddId).click({editForm:this._editFormObj},callAddForm);
 			}	
 		
-			this.callAjax(this);		
+			//this.callAjax(this);
+			this.buildTableAjax(this);
 		}	
+		
+		buildTableAjax(tableObj){
+			var tableObjectName;
+			var getTableData =this._getTableData;
+			if (tableObj._editFormObj!=null){
+				tableObjectName=tableObj._editFormObj._saveButtonId[1];
+			}
+			var dynamicColumn=getDataColumn(tableObjectName,this._numberOfColumns,this._type);
+			var table=$(this._tableId);
+			 var dataTable=table.DataTable({
+				  	"processing": true,
+			        "serverSide": true,			        
+			        "pageLength": 2,			        
+			        "columns":dynamicColumn,
+				   "ajax": {
+		               "url": getTableData,
+		               "type": "POST",
+		               "contentType" : "application/json; charset=utf-8",			    
+		               "data": function ( d ) {
+		                   return JSON.stringify(d); // NOTE: you also need to stringify POST payload
+		               },
+					 "error": function(jqXHR, textStatus, errorThrown){
+					     alert(errorThrown);   
+						// $('#example').DataTable().clear().draw();
+					   }           
+		           }
+			    } );
+		}
 		
 		callAjax(tableObj){			
 			var getTableData =this._getTableData;
@@ -88,6 +117,10 @@ class TableClass{
 			var jsonObj= this._jsonObj;
 			var displayIfNoData=this._displayIfNoData;			
 			var numberOfColumns=this._numberOfColumns;
+			var tableObjectName;
+			if (tableObj._editFormObj!=null){
+				tableObjectName=tableObj._editFormObj._saveButtonId[1];
+			}
 			$.ajax({
 				type : "POST",
 				url : getTableData, 
@@ -99,8 +132,8 @@ class TableClass{
 					$("body").addClass("loading");
 				},
 				success : function(data) {					
-					var rowDataSet = getDataRow(data);
-					var dynamicColumn=getDataColumn(tableObj,numberOfColumns,data,type);
+					var rowDataSet = getDataRow(data);					
+					var dynamicColumn=getDataColumn(tableObjectName,numberOfColumns,type);				
 					buildTable(tableObj,dynamicColumn,rowDataSet);
 				},
 				error: function(xhr, errorType, exception) {	
@@ -472,8 +505,9 @@ class EditForm{
 //End of EditForm Class
 //--------------------------------------------
 
-function getDataColumn(tableObj,numberOfColumns,data,type){
+function getDataColumn(tableObjectName,numberOfColumns,type){
 	var dynamicColumns=[];
+
 	dynamicColumns.length=numberOfColumns;		
 
     var n=numberOfColumns-1;
@@ -499,8 +533,8 @@ function getDataColumn(tableObj,numberOfColumns,data,type){
                  };  
 	    		dynamicColumns[n]= {"render" : function(data,type,row) {				
 	    			return '<div class="table-data-feature">'
-	    			+'<button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit" data-backdrop="false" onclick="tableObj._editFormObj.openEditModal('+row[0]+')" ><i class="zmdi zmdi-edit"></i></button>'
-	    			+'<button id="btnDelete" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="callDeleteDialog('+row[0]+',tableObj)"><i class="zmdi zmdi-delete"></i></button>'
+	    			+'<button id="btnEdit" class="item" data-toggle="tooltip" data-placement="top" title="Edit" data-backdrop="false" onclick="'+tableObjectName +'._editFormObj.openEditModal('+row[0]+')" ><i class="zmdi zmdi-edit"></i></button>'
+	    			+'<button id="btnDelete" class="item" data-toggle="tooltip" data-placement="top" title="Delete" onclick="callDeleteDialog('+row[0]+','+tableObjectName+')"><i class="zmdi zmdi-delete"></i></button>'
 	    			+'</div>';
 	    		},
 	    		sClass: "alignCenter",
@@ -578,7 +612,7 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
 	"bFilter" : bFilter,
 	"bInfo" : bInfo,	
     "aaData": rowDataSet,
-    "aoColumns": dynamicColumns,
+    "columns": dynamicColumns,
     "responsive": true,
     "retrieve": true
     });

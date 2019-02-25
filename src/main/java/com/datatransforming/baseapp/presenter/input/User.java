@@ -1,24 +1,24 @@
 package com.datatransforming.baseapp.presenter.input;
 
 public class User {
-	 private int id;
+	 private String id;
 	    private String name;
-	    private int age;
+	    private String age;
 	    
 	    // ... constructor + accessors
 
 
-	    public User(int id, String name, int age) {
+	    public User(String id, String name, String age) {
 	        this.id = id;
 	        this.name = name;
 	        this.age = age;
 	    }
 
-	    public int getId() {
+	    public String getId() {
 	        return id;
 	    }
 
-	    public void setId(int id) {
+	    public void setId(String id) {
 	        this.id = id;
 	    }
 
@@ -30,11 +30,11 @@ public class User {
 	        this.name = name;
 	    }
 
-	    public int getAge() {
+	    public String getAge() {
 	        return age;
 	    }
 
-	    public void setAge(int age) {
+	    public void setAge(String age) {
 	        this.age = age;
 	    }
 }
