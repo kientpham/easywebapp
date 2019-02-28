@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.userservice.domain.UserDomain;
-import com.kienp.webapp.userservice.entity.User;
+import com.kienp.webapp.userservice.dto.entity.User;
 import com.kienp.webapp.userservice.service.UserService;
 
 @Component
@@ -47,8 +47,7 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public Page<User> searchUser(String searchTerm, Pageable pageRequest) {
-		Page<User> page;//=new Page<User>();				
-		
+			
 		return null;		
 	}
 

@@ -1,4 +1,4 @@
-package com.kienp.webapp.userservice.entity;
+package com.kienp.webapp.userservice.dto.entity;
 
 import java.io.Serializable;
 import java.util.List;

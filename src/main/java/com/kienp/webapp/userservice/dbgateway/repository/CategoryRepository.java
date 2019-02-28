@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 
-import com.kienp.webapp.userservice.entity.Category;
+import com.kienp.webapp.userservice.dto.entity.Category;
 
 
 public interface CategoryRepository extends CrudRepository<Category, Integer> {

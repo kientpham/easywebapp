@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.kienp.webapp.userservice.entity.Group;
+import com.kienp.webapp.userservice.dto.entity.Group;
 
 @Component
 public interface GroupService {

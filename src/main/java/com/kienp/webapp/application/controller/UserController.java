@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kienp.webapp.application.interactor.user.UserEditInteractor;
-import com.kienp.webapp.application.interactor.user.UserListInteractor;
+import com.kienp.webapp.application.connector.user.UserEditInteractor;
+import com.kienp.webapp.application.connector.user.UserListInteractor;
 import com.kienp.webapp.application.model.datatable.PaginationCriteria;
 import com.kienp.webapp.application.model.datatable.TablePage;
 import com.kienp.webapp.application.model.user.GroupListJoinUser;

@@ -1,4 +1,4 @@
-package com.kienp.webapp.application.interactor.user;
+package com.kienp.webapp.application.connector.user;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.application.model.user.GroupListJoinUser;
 import com.kienp.webapp.application.model.user.UserEdit;
-import com.kienp.webapp.userservice.entity.Group;
-import com.kienp.webapp.userservice.entity.User;
+import com.kienp.webapp.userservice.dto.entity.Group;
+import com.kienp.webapp.userservice.dto.entity.User;
 import com.kienp.webapp.userservice.service.GroupService;
 import com.kienp.webapp.userservice.service.UserService;
 
@@ -49,7 +49,7 @@ public class UserEditInteractor{
 			}
 			returnList.add(groupJoinUser);
 		}		
-		return returnList;// groupRepository.getGroupListJoinUser(userId);
+		return returnList;
 	}	
 	
 	private User getUserEntity(UserEdit eUser) {

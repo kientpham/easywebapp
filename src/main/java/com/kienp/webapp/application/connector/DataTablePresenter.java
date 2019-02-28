@@ -1,4 +1,4 @@
-package com.kienp.webapp.application.interactor;
+package com.kienp.webapp.application.connector;
 
 import java.util.ArrayList;
 import java.util.HashMap;

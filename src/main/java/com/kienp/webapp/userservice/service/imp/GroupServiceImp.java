@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.userservice.dbgateway.repository.GroupRepository;
-import com.kienp.webapp.userservice.entity.Group;
+import com.kienp.webapp.userservice.dto.entity.Group;
 import com.kienp.webapp.userservice.service.GroupService;
 
 @Component

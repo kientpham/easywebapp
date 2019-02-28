@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import com.kienp.webapp.userservice.entity.User;
+import com.kienp.webapp.userservice.dto.entity.User;
 
 public interface UserPagingRepository extends Repository<User, Integer>{
 

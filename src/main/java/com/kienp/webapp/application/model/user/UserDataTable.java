@@ -2,7 +2,7 @@ package com.kienp.webapp.application.model.user;
 
 import java.util.Map;
 
-import com.kienp.webapp.userservice.entity.User;
+import com.kienp.webapp.userservice.dto.entity.User;
 
 import lombok.Getter;
 import lombok.Setter;

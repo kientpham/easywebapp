@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.kienp.webapp.userservice.dbgateway.UserGatewayService;
 import com.kienp.webapp.userservice.dbgateway.repository.UserPagingRepository;
 import com.kienp.webapp.userservice.dbgateway.repository.UserRepository;
-import com.kienp.webapp.userservice.entity.User;
+import com.kienp.webapp.userservice.dto.entity.User;
 
 @Component
 public class UserGatewayImp implements UserGatewayService {

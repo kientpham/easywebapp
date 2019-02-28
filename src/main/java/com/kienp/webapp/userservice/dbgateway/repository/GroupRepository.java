@@ -1,10 +1,10 @@
 package com.kienp.webapp.userservice.dbgateway.repository;
 
-import com.kienp.webapp.userservice.entity.Group;
-
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+
+import com.kienp.webapp.userservice.dto.entity.Group;
 
 public interface GroupRepository extends CrudRepository<Group, Integer> {
 

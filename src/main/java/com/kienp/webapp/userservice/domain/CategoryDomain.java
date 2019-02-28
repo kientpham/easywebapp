@@ -10,8 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.userservice.dbgateway.repository.CategoryRepository;
-import com.kienp.webapp.userservice.entity.Category;
-import com.kienp.webapp.userservice.service.CategoryService;
+import com.kienp.webapp.userservice.dto.entity.Category;
 
 @Component
 public class CategoryDomain {
