@@ -1,11 +1,10 @@
 package com.kienp.webapp.userservice.service;
 
 import java.util.List;
-
-import org.springframework.stereotype.Component;
+import java.util.Map;
 
 import com.kienp.webapp.userservice.entity.Category;
-@Component
+
 public interface CategoryService {
 	
 	public List<Category> getAllCategory();
@@ -13,5 +12,7 @@ public interface CategoryService {
 	public List<Category> getCategoryByGroup(String categoryGroup);
 	
 	public List<Category> getCategoryByGroups(List<String> categoryGroups);
+	
+	public Map<Integer, String> getCategoryMapByGroups(List<String> categoryGroups);
 
 }

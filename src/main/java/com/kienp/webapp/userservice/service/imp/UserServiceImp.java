@@ -3,9 +3,11 @@ package com.kienp.webapp.userservice.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.kienp.webapp.userservice.dbgateway.UserGatewayService;
+import com.kienp.webapp.userservice.domain.UserDomain;
 import com.kienp.webapp.userservice.entity.User;
 import com.kienp.webapp.userservice.service.UserService;
 
@@ -13,16 +15,16 @@ import com.kienp.webapp.userservice.service.UserService;
 public class UserServiceImp implements UserService{
 
 	@Autowired
-	private UserGatewayService userGateway;
+	private UserDomain userDomain;
 	
 	@Override
 	public List<User> getAllUsers() {	
-		return userGateway.findAll();
+		return userDomain.getAllUsers();
 	}
 
 	@Override
 	public User getUserById(Integer userId) {		
-		return userGateway.findById(userId);
+		return userDomain.getUserById(userId);
 	}
 
 	@Override
@@ -39,14 +41,27 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public User saveUser(User user) {
-		// TODO Auto-generated method stub
-		return userGateway.save(user);
+
+		return userDomain.saveUser(user);
+	}
+
+	@Override
+	public Page<User> searchUser(String searchTerm, Pageable pageRequest) {
+		Page<User> page;//=new Page<User>();				
+		
+		return null;		
 	}
 
 	@Override
 	public List<User> searchUser() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Page<User> getAllUser(Pageable pageRequest) {
+		// TODO Auto-generated method stub
+		return userDomain.getAllUser(pageRequest);
 	}
 
 }

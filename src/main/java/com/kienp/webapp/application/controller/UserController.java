@@ -35,7 +35,7 @@ public class UserController {
 	@RequestMapping(value = "/user_paginated", method = RequestMethod.POST)
 	@ResponseBody
 	public TablePage listUsers(@RequestBody PaginationCriteria paginationCriteria) {		
-		return userInteractor.getUsersListAjax(paginationCriteria);
+		return userInteractor.getUsersListPaging(paginationCriteria);
 	}
 
 	@RequestMapping(value = "/getUserDataTable", method = RequestMethod.POST, produces = "application/json")
