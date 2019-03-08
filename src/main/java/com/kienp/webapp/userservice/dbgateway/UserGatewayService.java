@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.kienp.webapp.userservice.dto.entity.User;
+import com.kienp.webapp.userservice.dto.input.PagingInputDTO;
+import com.kienp.webapp.userservice.dto.output.PagingOutputDTO;
 
 public interface UserGatewayService {
 
@@ -17,9 +19,11 @@ public interface UserGatewayService {
 
 	public List<User> deleteListUser(List<Integer> ids);
 
-	public User deleteUserById(Integer userId);
+	public void deleteUserById(Integer userId);
 
 	public User save(User user);
+	
+	public PagingOutputDTO<User> searchUser(PagingInputDTO pagingInput);
 	
 	
 }

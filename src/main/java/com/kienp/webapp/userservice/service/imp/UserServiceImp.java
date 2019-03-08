@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.userservice.domain.UserDomain;
 import com.kienp.webapp.userservice.dto.entity.User;
+import com.kienp.webapp.userservice.dto.input.PagingInputDTO;
+import com.kienp.webapp.userservice.dto.output.PagingOutputDTO;
 import com.kienp.webapp.userservice.service.UserService;
 
 @Component
@@ -28,15 +30,15 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public List<User> deleteListUser(List<Integer> ids) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteListUser(List<Integer> ids) {
+		for (Integer id:ids) {
+			this.deleteUserById(id);
+		}		
 	}
 
 	@Override
-	public User deleteUserById(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUserById(Integer userId) {		
+		userDomain.deleteUserById(userId);
 	}
 
 	@Override
@@ -61,6 +63,11 @@ public class UserServiceImp implements UserService{
 	public Page<User> getAllUser(Pageable pageRequest) {
 		// TODO Auto-generated method stub
 		return userDomain.getAllUser(pageRequest);
+	}
+
+	@Override
+	public PagingOutputDTO<User> searchUser(PagingInputDTO pagingInput) {
+		return userDomain.searchUser(pagingInput);
 	}
 
 }

@@ -2588,7 +2588,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: 76px;
+    height: 50px;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -4577,11 +4577,11 @@ section {
     -moz-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    margin-bottom: 28px;
+    margin-bottom: 15px;
 }
 
 .table-data__tool .table-data__tool-left > div {
-    margin-right: 12px;
+    margin-right: 0px;
 }
 
 .table-data__tool .table-data__tool-right > button {
@@ -4681,7 +4681,7 @@ section {
     font-weight: 400;
     text-transform: capitalize;
     padding: 18px 40px;
-    padding-right: 10px;
+    padding-right: 0px;
 }
 
 .table-data3 thead tr th:first-child {
@@ -4831,18 +4831,18 @@ section {
 }
 
 .au-breadcrumb-span {
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
     display: inline-block;
 }
 
 .au-breadcrumb__list {
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 0px;
 }
 
 .au-breadcrumb__list li {
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
 }
 

@@ -45,3 +45,61 @@
   left: 400;
   z-index: 9999 !important; 
 }
+.dataTables_wrapper .dataTables_length {
+float: right;
+ margin-bottom: 15px;
+}
+.dataTables_wrapper .dataTables_filter {
+float: left !important;
+text-align: left;
+ margin-bottom: 15px;
+}
+
+.dataTables_wrapper .dataTables_filter >label,
+.dataTables_wrapper .dataTables_filter >input
+{
+	font-size:14px;
+}
+
+.dataTables_wrapper .dataTables_filter label > input
+{
+	font-size:14px;
+	border: 0.5px solid LightGray;
+  border-radius: 4px;
+  height: 35px;
+   width: 250px;
+   min-width: 100px;
+}
+
+.dataTables_info,.paginate_button{
+	font-size:14px;
+}
+
+.dataTables_length >label,
+.dataTables_length >select{
+	font-size:14px;
+
+}
+
+.active-link{
+	color: blue;
+}
+
+.chkBox{
+	 align-content: center;
+	 text-align: center;
+	 padding:6px;
+}
+
+ table.dataTable thead th,
+table.dataTable tfoot th {
+  text-align: left;
+  padding-left: 6px;
+}
+
+.breadcrumbDiv{
+	height: 40px;
+	line-height:0px;
+	padding:0px;
+}
+

@@ -36,6 +36,12 @@ class TableClass{
 		set bPaginate(value){
 			this._bPaginate=value;
 		}
+		set pageLength(value){
+			this._pageLength=value;
+		}
+		set bLengthChange(value){
+			this._bLengthChange=value;
+		}
 		set order(value){
 			this._order=value;
 		}
@@ -48,14 +54,20 @@ class TableClass{
 		set checkAllId(value){
 			this._checkAllId=value;
 		}		
-	
 		set divTableData(value){
 			if (value.includes("#")){
 				this._divTableData=value;	
 			}else{
 				this._divTableData="#"+value;
 			}
-		}			
+		}	
+		set bLazyTable(value){
+			this._bLazyTable=value;
+		}
+		set searchPlaceholder(value){
+			this._searchPlaceholder=value;
+		}
+		
 		show(){
 			$(this._divTableData).removeClass("hide");
 		}		
@@ -63,8 +75,7 @@ class TableClass{
 			$(this._divTableData).addClass("hide");
 		}
 		
-		loadTable(){	
-			
+		loadElement(){
 			if($('iconloading')!=null ){
 				 $('body').append('<div class="loadingProcess" id="iconloading"></div>');
 			}			
@@ -77,24 +88,75 @@ class TableClass{
 			
 			if(this._buttonAddId!=null){			
 					$(this._buttonAddId).click({editForm:this._editFormObj},callAddForm);
-			}	
+			}
+		}
 		
-			//this.callAjax(this);
-			this.buildTableAjax(this);
+		loadTable(){				
+			this.loadElement();	
+			if(this._bLazyTable==true){			
+				this.buildLazyTable(this);					
+			}else{
+				this.callAjax(this);
+			}
+			if (this._searchPlaceholder==null){
+				this._searchPlaceholder="Type here to search . . .";
+			}
+			$('.dataTables_wrapper').children('.dataTables_filter').children('label').children('input').attr("placeholder", this._searchPlaceholder);
+			$('.dataTables_wrapper').children('.dataTables_filter').children('label').children('input').focus();
 		}	
 		
-		buildTableAjax(tableObj){
+		reloadTable(){
+			this.loadElement();
+			if(this._bLazyTable==true){			
+				var table=$(this._tableId).DataTable().ajax.reload( null, false )					
+			}else{
+				this.callAjax(this);
+			}
+		}
+		
+		buildLazyTable(tableObj){
 			var tableObjectName;
 			var getTableData =this._getTableData;
 			if (tableObj._editFormObj!=null){
 				tableObjectName=tableObj._editFormObj._saveButtonId[1];
 			}
 			var dynamicColumn=getDataColumn(tableObjectName,this._numberOfColumns,this._type);
-			var table=$(this._tableId);
-			 var dataTable=table.DataTable({
+					
+		    var bFilter =this._bFilter;    
+		    var checkAllId=this._checkAllId;
+		    var bInfo=this._bInfo;
+		    if (bFilter==null){
+		    	bFilter=true;
+		    }
+		    if (bInfo==null){
+		    	bInfo=true;
+		    }
+		    var bPaginate=this._bPaginate;
+		    if (bPaginate==null){
+		    	bPaginate=true;
+		    }
+		    var pageLength=this._pageLength;		    
+		    var bLengthChange=this._bLengthChange;		    
+		    var order=this._order;
+		    var ordering =true;
+		    if(order==null){		    	
+		    	order=1;
+		    }    			
+			var table=$(this._tableId);			
+			var dataTable=table.DataTable({	
+					"ordering" : ordering,
+					"order": [[ order, "asc" ]],
+					"bPaginate" : bPaginate,
+					"bLengthChange" : bLengthChange,
+					"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+					"bAutoWidth": false,
+					"bFilter" : bFilter,
+					"bInfo" : bInfo,	
+					"responsive": true,
+					"retrieve": true,
 				  	"processing": true,
 			        "serverSide": true,			        
-			        "pageLength": 2,			        
+			        "pageLength": pageLength,			        
 			        "columns":dynamicColumn,
 				   "ajax": {
 		               "url": getTableData,
@@ -104,8 +166,7 @@ class TableClass{
 		                   return JSON.stringify(d); // NOTE: you also need to stringify POST payload
 		               },
 					 "error": function(jqXHR, textStatus, errorThrown){
-					     alert(errorThrown);   
-						// $('#example').DataTable().clear().draw();
+					     alert(errorThrown);					
 					   }           
 		           }
 			    } );
@@ -165,7 +226,7 @@ class TableClass{
 					$("body").removeClass("loading");
 				}
 			});			
-			this.loadTable();
+			this.reloadTable();
 			return true;
 		}
 		
@@ -175,8 +236,8 @@ class TableClass{
 		}
 		
 		saveRecord(){			
-			if(this._editFormObj.saveRecord()){				
-				this.loadTable();	
+			if(this._editFormObj.saveRecord()){
+				this.reloadTable();				
 			}
 		}
 		
@@ -595,7 +656,11 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
     if (bPaginate==null){
     	bPaginate=true;
     }
+    var pageLength=this._pageLength;
+    
+    var bLengthChange=this._bLengthChange;
     var order=tableObj._order;
+    
     var ordering =true;
     if(order!=null){
     	ordering=false;    	
@@ -606,7 +671,7 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
 	"ordering" : ordering,
 	"order": [[ order, "asc" ]],
 	"bPaginate" : bPaginate,
-	//"bLengthChange" : false,
+	"bLengthChange" : bLengthChange,
 	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 	"bAutoWidth": false,
 	"bFilter" : bFilter,
@@ -740,14 +805,14 @@ function createBreadcrumb(breadcrumbDiv, itemAndLinkList){
 	html +='<div class="col-md-12">';
 	html +='<div class="au-breadcrumb-content">';
 	html +='<div class="au-breadcrumb-left">'
-	html +='<span class="au-breadcrumb-span">You are here:</span>';
+	
 	html +='<ul class="list-unstyled list-inline au-breadcrumb__list">';
 	var n=itemAndLinkList.length-1;	
 	for (var i=0;i<n ;i++){
 		html +='<li class="list-inline-item active">';
-		html += '<a href="'+itemAndLinkList[i][1] +'">'+ itemAndLinkList[i][0] + '</a>';
+		html += '<a class="active-link" href="'+itemAndLinkList[i][1] +'">'+ itemAndLinkList[i][0] + '</a>';
 		html +='</li>';
-		html +='<li class="list-inline-item seprate"><span>/</span></li>';		
+		html +='<li class="list-inline-item seprate"><span> / </span></li>';		
 	}			
 	html +='<li class="list-inline-item">'+ itemAndLinkList[n][0] +'</li>';
 	html +='</ul></div></div></div></div>';	

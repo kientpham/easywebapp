@@ -11,12 +11,17 @@
     <!-- Title Page-->
     <title>User Management</title>
     <!-- Fontfaces CSS-->
+    
     <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+        
+    
     <!-- Vendor CSS-->
     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
     <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
@@ -26,6 +31,9 @@
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 	<link href="vendor/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+	
+	
+	
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 	<link href="css/style.css" rel="stylesheet" media="all" type="text/css">
@@ -36,7 +44,7 @@
 		<div id="headerDiv"></div>		
         <!-- PAGE CONTENT-->
         <div class="page-content--bgf7">            
-			<div id="breadcrumbDiv" class="container"></div>					
+						
 			<div id="divAlert" class="container"></div>             
             <!-- DATA TABLE-->
             <section class="p-t-20">
@@ -45,20 +53,7 @@
                         <div class="col-md-12 top-campaign">                            
                             <div class="table-data__tool">
                                 <div class="table-data__tool-left">
-                                    <div class="rs-select2--light rs-select2--sm">
-                                        <select id="userStatusSearch" class="js-select2" name="property">                                            
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                    <div class="rs-select2--light">
-										<form id="searchName" class="au-form-icon--sm" action="" method="post">
-											<input id="name" class="au-input--w200 au-input--style2" type="text" placeholder="Search by name...">
-											<button id="searchButton" class="au-btn--submit2" >
-												<i class="zmdi zmdi-search"></i>
-											</button>
-										</form>
-                                       			
-                                    </div>									
+                                	<div id="breadcrumbDiv" class="container breadcrumbDiv"></div>		                                    		
                                 </div>
                                 <div class="table-data__tool-right">
                                     <button id="btnAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -66,16 +61,16 @@
                                 </div>
                             </div>
                             <div id="divtblResult" class="table-responsive ">
-								<table id="tblResult" class="table display table-top-campaign">
+								<table id="tblResult" class="table  table-top-campaign table-hover">
 								   <thead>
 										<tr>
-											<th width="0%" style="text-align: center;"></th>
-											<th data-priority="1" width="15%" style="text-align: left;">User ID</th>
-											<th data-priority="2" width="25%" style="text-align: left;">Full Name</th>
-											<th data-priority="5" width="15%" style="text-align: left;">Email</th>
-											<th data-priority="6" width="7%" style="text-align: left;">Type</th>
-											<th data-priority="5" width="7%" style="text-align: left;">Status</th>
-											<th data-priority="6" width="20%" style="text-align: left;">Address</th>	
+											<th width="4%" class="chkBox"></th>
+											<th data-priority="1" width="15%" style="text-align: left;" class="sorting">User ID</th>
+											<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Full Name</th>
+											<th data-priority="5" width="15%" style="text-align: left;" class="sorting">Email</th>
+											<th data-priority="6" width="7%" style="text-align: left;" class="sorting">Type</th>
+											<th data-priority="5" width="7%" style="text-align: left;" class="sorting">Status</th>
+											<th data-priority="6" width="20%" style="text-align: left;" class="sorting">Address</th>	
 											<th data-priority="1" width="1%">Action</th>																				
 										</tr>
 									</thead>
@@ -95,8 +90,10 @@
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
+    
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    
     <!-- Vendor JS       -->
     <script src="vendor/slick/slick.min.js"></script>
     <script src="vendor/wow/wow.min.js"></script>
@@ -157,16 +154,20 @@
 						
 			tableObj1= new TableClass();
 			tableObj1.type="edit";
-			tableObj1.bFilter=false;
-			tableObj1.bPaginate=false;
-			tableObj1.bInfo=false;
+			tableObj1.bFilter=true;
+			tableObj1.bPaginate=true;
+			tableObj1.pageLength=3;
+			tableObj1.bInfo=true;
+			tableObj1.bLengthChange=true;
 			tableObj1.order=2;
 			tableObj1.deleteController="deleteUsers";
 			tableObj1.editFormObj=editFormObj;		
 			tableObj1.tableId="#tblResult";
 			tableObj1.getTableData="/user_paginated";
 			tableObj1.buttonAddId="#btnAdd";	
-			tableObj1.numberOfColumns=8;			
+			tableObj1.numberOfColumns=8;	
+			tableObj1.bLazyTable=true;	
+			tableObj1.searchPlaceholder="Type here to search user . . .";	
 			tableObj1.loadTable();		
 			
  			var dropdownListSearch = new Array ( );
@@ -180,7 +181,7 @@
 			searchFormObj.getValuesToBind="getUserSearchForm";
 			searchFormObj.dataTableListObj=[tableObj1];
 			searchFormObj.dropdownList=dropdownListSearch; 
-			//searchFormObj.initiateForm();
+			//searchFormObj.initiateForm(); //This is for advance search but not able to load by paging.
 		});
 	</script>
 </body>

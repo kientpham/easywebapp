@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.kienp.webapp.userservice.dbgateway.UserGatewayService;
 import com.kienp.webapp.userservice.dto.entity.User;
+import com.kienp.webapp.userservice.dto.input.PagingInputDTO;
+import com.kienp.webapp.userservice.dto.output.PagingOutputDTO;
 
 @Component
 public class UserDomain {
@@ -29,9 +31,8 @@ public class UserDomain {
 		return null;
 	}
 
-	public User deleteUserById(Integer userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteUserById(Integer userId) {
+		userGateway.deleteUserById(userId);
 	}
 
 	public User saveUser(User user) {
@@ -40,5 +41,10 @@ public class UserDomain {
 	
 	public Page<User> getAllUser(Pageable pageRequest){
 		return userGateway.findAll(pageRequest);
+	}
+	
+	public PagingOutputDTO<User> searchUser(PagingInputDTO pagingInput) {
+		
+		return userGateway.searchUser(pagingInput);
 	}
 }

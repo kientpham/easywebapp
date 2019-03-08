@@ -34,6 +34,9 @@ public class UserEdit implements Serializable {
 	
 	private List<Integer> tblUserGroup;
 	
+	public UserEdit() {
+		
+	}
 	public UserEdit(User user) {
 		if (user != null) {
 			this.setId(user.getId());
