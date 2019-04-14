@@ -22,6 +22,4 @@ public class UrlController {
 		return "index1";
 	}
 	
-	
-	
 }
