@@ -22,4 +22,9 @@ public class UrlController {
 		return "index1";
 	}
 	
+	@GetMapping("/grouplist")
+	public String groupList() {		
+		return "group_list";
+	}
+	
 }

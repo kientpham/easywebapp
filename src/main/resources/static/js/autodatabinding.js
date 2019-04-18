@@ -373,7 +373,7 @@ class EditForm{
 				var dropdown = document.getElementById(dropdownList[i][0]);
 				$(dropdown).append('<option value=0>All</option>');
 			}
-		}
+		}		
 		$.ajax({
 			type : "GET",
 			url : getDropDownValue, 
@@ -382,7 +382,7 @@ class EditForm{
 			success : function(response) {
 				var len = response.length;
 	            for(var i=0; i<len; i++){	            	
-	            	var catGroup = response[i].categoryGroup;
+	            	var catGroup = response[i].categoryGroup;	     
 	            	var dropdownLen = dropdownList.length;
 	            	for (var j=0;j<dropdownLen;j++){
 	            		if (dropdownList[j][1]==catGroup){

@@ -6,8 +6,16 @@
 	min-width:100px;
 }
 
-.mw200{
+.mw160{
 	min-width:160px;
+}
+
+.mw200{
+	min-width:200px;
+}
+
+.mw250{
+	min-width:250px;
 }
 
 .maw400{

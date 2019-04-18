@@ -112,7 +112,7 @@
 	<script type="text/javascript" src="js/autodatabinding.js"></script>
 	<script>
 		var searchFormObj;
-		var tableObj1;
+		var userTableObj;
 		var editFormObj;
 		$(document).ready(function() {	
 				
@@ -139,8 +139,8 @@
 			tableGroupObj.checkAllId="#checkAllGroup";
 			
 			var dropdownListEdit = new Array ( );
-			dropdownListEdit[0] = new Array ( 'userType', 'userType',false);	
-			dropdownListEdit[1] = new Array ( 'userStatus', 'userStatus',false);	
+			dropdownListEdit[0] = new Array ( 'userType', 'USER_TYPE',false);	
+			dropdownListEdit[1] = new Array ( 'userStatus', 'USER_STATUS',false);	
 			editFormObj=new EditForm();
 			editFormObj.idFieldName="id";
 			editFormObj.editForm="#editModal";
@@ -149,40 +149,42 @@
 			editFormObj.getValuesToBind="getUser";
 			editFormObj.saveDataObject="addUser";
 			editFormObj.editFormHtml="user_edit.html";
-			editFormObj.saveButtonId=['#btnSave','tableObj1'];
+			editFormObj.saveButtonId=['#btnSave','userTableObj'];
 			editFormObj.dataTableListObj=[tableGroupObj]; 
 						
-			tableObj1= new TableClass();
-			tableObj1.type="edit";
-			tableObj1.bFilter=true;
-			tableObj1.bPaginate=true;
-			tableObj1.pageLength=3;
-			tableObj1.bInfo=true;
-			tableObj1.bLengthChange=true;
-			tableObj1.order=2;
-			tableObj1.deleteController="deleteUsers";
-			tableObj1.editFormObj=editFormObj;		
-			tableObj1.tableId="#tblResult";
-			tableObj1.getTableData="/user_paginated";
-			tableObj1.buttonAddId="#btnAdd";	
-			tableObj1.numberOfColumns=8;	
-			tableObj1.bLazyTable=true;	
-			tableObj1.searchPlaceholder="Type here to search user . . .";	
-			tableObj1.loadTable();		
+			userTableObj= new TableClass();
+			userTableObj.type="edit";
+			userTableObj.bFilter=true;
+			userTableObj.bPaginate=true;
+			userTableObj.pageLength=3;
+			userTableObj.bInfo=true;
+			userTableObj.bLengthChange=true;
+			userTableObj.order=2;
+			userTableObj.deleteController="deleteUsers";
+			userTableObj.editFormObj=editFormObj;		
+			userTableObj.tableId="#tblResult";
+			userTableObj.getTableData="/user_paginated";
+			userTableObj.buttonAddId="#btnAdd";	
+			userTableObj.numberOfColumns=8;	
+			userTableObj.bLazyTable=true;	
+			userTableObj.searchPlaceholder="Type here to search user . . .";	
+			userTableObj.loadTable();		
 			
- 			var dropdownListSearch = new Array ( );
+/*			This is for advance search but not able to load by paging.  		
+			
+			var dropdownListSearch = new Array ( );
 			dropdownListSearch[0] = new Array ( 'userStatusSearch', 'userStatus',true);			
-			
 			searchFormObj=new EditForm();
 			searchFormObj.idFieldName="id";
 			searchFormObj.editForm="#searchName";
 			searchFormObj.searchButton=['#searchButton','searchFormObj'];
 			searchFormObj.getDropDownValue="getAllCategories";
 			searchFormObj.getValuesToBind="getUserSearchForm";
-			searchFormObj.dataTableListObj=[tableObj1];
+			searchFormObj.dataTableListObj=[userTableObj];
 			searchFormObj.dropdownList=dropdownListSearch; 
-			//searchFormObj.initiateForm(); //This is for advance search but not able to load by paging.
-		});
+			searchFormObj.initiateForm(); 			
+ */		
+			});
 	</script>
 </body>
 </html>

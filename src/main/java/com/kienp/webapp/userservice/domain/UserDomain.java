@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.kienp.webapp.userservice.dbgateway.UserGatewayService;
+import com.kienp.webapp.userservice.dbgateway.UserDBGateway;
 import com.kienp.webapp.userservice.dto.entity.User;
 import com.kienp.webapp.userservice.dto.input.PagingInputDTO;
 import com.kienp.webapp.userservice.dto.output.PagingOutputDTO;
@@ -16,7 +16,7 @@ import com.kienp.webapp.userservice.dto.output.PagingOutputDTO;
 public class UserDomain {
 
 	@Autowired
-	private UserGatewayService userGateway;
+	private UserDBGateway userGateway;
 	
 	public List<User> getAllUsers() {	
 		return userGateway.findAll();
