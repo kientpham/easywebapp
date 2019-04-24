@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kienp.webapp.application.connector.group.GroupEditConnector;
-import com.kienp.webapp.application.connector.group.GroupListConnector;
-import com.kienp.webapp.application.model.user.GroupEdit;
-import com.kienp.webapp.application.model.user.GroupTable;
+import com.kienp.webapp.application.model.group.GroupEdit;
+import com.kienp.webapp.application.model.group.GroupTable;
+import com.kienp.webapp.application.model.permission.PermissionJoinGroupList;
+import com.kienp.webapp.application.presenter.group.GroupEditPresenter;
+import com.kienp.webapp.application.presenter.group.GroupListPresenter;
 
 @RestController
 public class GroupController {
 
 	@Autowired
-	private GroupListConnector groupListConnector;
+	private GroupListPresenter groupListConnector;
 
 	@Autowired
-	private GroupEditConnector groupEditConnector;
+	private GroupEditPresenter groupEditConnector;
 
 	@RequestMapping(value = "/getAllGroup", method = RequestMethod.POST)
 	public List<GroupTable> getAllGroup() {
@@ -43,6 +44,11 @@ public class GroupController {
 	@RequestMapping(value = "/saveGroup", method = RequestMethod.POST)
 	public String saveGroup(@RequestBody(required = true) GroupEdit groupEdit) {
 		return groupEditConnector.saveGroup(groupEdit);
+	}
+	
+	@RequestMapping(value="/getPermissionGroupList", method=RequestMethod.POST)
+	public List<PermissionJoinGroupList> getPermissionJoinGroupList(@RequestBody(required=true) int id){
+		return groupEditConnector.getPermissionListJoinGroup(id);
 	}
 
 }

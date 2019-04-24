@@ -27,4 +27,9 @@ public class UrlController {
 		return "group_list";
 	}
 	
+	@GetMapping("/permissionlist")
+	public String permissionList() {		
+		return "permission_list";
+	}
+	
 }

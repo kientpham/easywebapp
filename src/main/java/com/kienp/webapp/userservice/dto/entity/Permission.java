@@ -1,5 +1,6 @@
 package com.kienp.webapp.userservice.dto.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -33,8 +36,12 @@ public class Permission {
 	@Column(name="TYPE")
 	private Integer type;
 	
-	@ManyToMany(mappedBy="permissions")
-	private List<Group> groups; 
+	@ManyToMany//(mappedBy="permissions")
+	@JoinTable(
+			  name="GROUP_PERMISSION_JOIN",
+			  joinColumns= @JoinColumn(name="PERMISSION_ID"),
+			  inverseJoinColumns= @JoinColumn(name="GROUP_ID"))
+	private List<Group> groups=new ArrayList<Group>(); 
 	
 	public Permission() {		
 	}

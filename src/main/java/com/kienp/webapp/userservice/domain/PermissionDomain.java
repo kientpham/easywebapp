@@ -18,6 +18,10 @@ public class PermissionDomain {
 		return permissionDBGateway.listAll();
 	}
 	
+	public List<Permission> getPermissionsByListIds(List<Integer> ids){
+		return permissionDBGateway.findByListIds(ids);
+	}
+	
 	public Permission getPermissionById(Integer id) {
 		return permissionDBGateway.findById(id);
 	}

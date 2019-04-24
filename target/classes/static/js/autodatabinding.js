@@ -482,7 +482,7 @@ class EditForm{
 			        for(var key in columnsIn){		 
 			        	var control= document.getElementById(key);
 			        	if (control !=null){
-			        		if (control.type ==="checkbox"){		        			
+			        		if (control.type ==="checkbox"){			        			
 			        			control.checked=columnsIn[key];
 			        		}else{
 			        			control.value=columnsIn[key];

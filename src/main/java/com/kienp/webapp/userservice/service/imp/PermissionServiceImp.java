@@ -17,13 +17,11 @@ public class PermissionServiceImp implements PermissionService {
 
 	@Override
 	public List<Permission> getAllPermissions() {
-
 		return permissionDomain.getAllPermissions();
 	}
 
 	@Override
 	public Permission getPermissionById(Integer id) {
-
 		return permissionDomain.getPermissionById(id);
 	}
 
@@ -37,6 +35,11 @@ public class PermissionServiceImp implements PermissionService {
 	@Override
 	public Permission savePermision(Permission permission) {
 		return permissionDomain.savePermission(permission);
+	}
+
+	@Override
+	public List<Permission> getPermissionListByIds(List<Integer> ids) {
+		return permissionDomain.getPermissionsByListIds(ids);
 	}
 
 }

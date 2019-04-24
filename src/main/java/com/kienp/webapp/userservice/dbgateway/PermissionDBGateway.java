@@ -8,6 +8,8 @@ public interface PermissionDBGateway {
 
 	public List<Permission> listAll();
 	
+	public List<Permission> findByListIds(List<Integer> ids);
+	
 	public Permission findById(Integer id);
 	
 	public void deleteById(Integer id);

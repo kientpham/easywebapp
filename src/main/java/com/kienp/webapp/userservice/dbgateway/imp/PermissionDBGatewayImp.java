@@ -35,4 +35,10 @@ public class PermissionDBGatewayImp implements PermissionDBGateway {
 		return permissionRepo.save(permission);
 	}
 
+	@Override
+	public List<Permission> findByListIds(List<Integer> ids) {
+
+		return (List<Permission>)permissionRepo.findAllById(ids);
+	}
+
 }

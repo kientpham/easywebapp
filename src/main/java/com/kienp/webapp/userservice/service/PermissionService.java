@@ -8,6 +8,8 @@ public interface PermissionService {
 	
 	public List<Permission> getAllPermissions();
 	
+	public List<Permission> getPermissionListByIds(List<Integer> ids);
+	
 	public Permission getPermissionById(Integer id);
 	
 	public void deleteListPermission(List<Integer> ids);
