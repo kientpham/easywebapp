@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+</head>
+<body >                         
+    <div class="table-data__tool">
+        <div class="table-data__tool-left">
+        	<div id="breadcrumbDiv" class="container breadcrumbDiv"></div>		                                    		
+        </div>
+        <div class="table-data__tool-right">
+            <button id="btnAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <i class="zmdi zmdi-plus"></i>add group</button>                                    
+        </div>
+    </div>
+    <div id="divtblResult" class="table-responsive ">
+		<table id="tblGroup" class="table  table-top-campaign table-hover">
+		   <thead>
+				<tr>
+					<th width="4%" class="chkBox"></th>
+					<th data-priority="1" width="20%" style="text-align: left;" class="sorting">Group Name</th>
+					<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Status</th>
+					<th data-priority="3" width="50%" style="text-align: left;" class="sorting">Description</th>
+					<th data-priority="1" width="1%">Action</th>	
+				</tr>
+			</thead>
+			<tbody>											
+			</tbody>
+		</table>								
+	</div>
+    
+	<script>
+		var searchFormObj;
+		var groupTableObj;
+		var editFormObj;
+		$(document).ready(function() {	
+		
+			var breadcrumb = new Array ( );
+			breadcrumb[0] = new Array ( 'Home', '#');			
+			breadcrumb[1] = new Array ( 'Group Management', '');					
+			createBreadcrumb('breadcrumbDiv',breadcrumb);
+			
+			var tablePermissionObj= new TableClass();
+			tablePermissionObj.type="checkbox";
+			tablePermissionObj.bFilter=false;
+			tablePermissionObj.bPaginate=false;			
+			tablePermissionObj.bInfo=false;
+			tablePermissionObj.orderColumn=1;	
+			tablePermissionObj.tableId="#tblPermissionGroup";
+			tablePermissionObj.getTableData="getPermissionGroupList";		
+			tablePermissionObj.numberOfColumns=2;
+			tablePermissionObj.checkAllId="#checkAllPermission";
+			
+			var dropdownListEdit = new Array ( );
+			dropdownListEdit[0] = new Array ( 'groupStatus', 'GROUP_STATUS',false);				
+			editFormObj=new EditForm();
+			editFormObj.idFieldName="id";
+			editFormObj.editForm="#editGroup";
+			editFormObj.getDropDownValue="getAllCategories";
+			editFormObj.dropdownList=dropdownListEdit;
+			editFormObj.getValuesToBind="getGroup";
+			editFormObj.saveDataObject="saveGroup";
+			editFormObj.editFormHtml="group_edit.html";
+			editFormObj.saveButtonId=['#btnSave','groupTableObj'];
+			editFormObj.dataTableListObj=[tablePermissionObj]; 
+						
+			groupTableObj= new TableClass();
+			groupTableObj.type="edit";
+			/* groupTableObj.bFilter=true;
+			groupTableObj.bPaginate=true;
+			groupTableObj.pageLength=3;
+			groupTableObj.bInfo=true;
+			groupTableObj.bLengthChange=true;
+			groupTableObj.bLazyTable=false;	 */
+			groupTableObj.tableId="#tblGroup";
+			groupTableObj.numberOfColumns=5;
+			groupTableObj.getTableData="getAllGroup";
+			groupTableObj.orderColumn=1;
+			groupTableObj.deleteController="deleteGroups";
+			groupTableObj.editFormObj=editFormObj;				
+			groupTableObj.buttonAddId="#btnAdd";							
+			groupTableObj.searchPlaceholder="Type here to search group . . .";
+				
+			groupTableObj.loadTable();	
+			
+ 			
+		});
+	</script>
+</body>
+</html>

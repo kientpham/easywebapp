@@ -17,12 +17,18 @@ public class PermissionTable {
 
 	private String type;
 
+	private String toggle;
+
+	private String menuPath;
+
 	private String description;
-	
-	public PermissionTable(Permission permission, Map<Integer,String> categoryMap) {
+
+	public PermissionTable(Permission permission, Map<Integer, String> categoryMap) {
 		this.setId(permission.getId());
 		this.setDescription(permission.getDescription());
 		this.setPermissionName(permission.getName());
+		this.setToggle(permission.getToggle()!=null && permission.getToggle() ? "ON" : "OFF");
+		this.setMenuPath(permission.getMenuPath());
 		this.setType(categoryMap.get(permission.getType()));
 	}
 }

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body >                               
+    <div class="table-data__tool">
+        <div class="table-data__tool-left">
+        	<div id="breadcrumbDiv" class="container breadcrumbDiv"></div>		                                    		
+        </div>
+        <div class="table-data__tool-right">
+            <button id="btnAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <i class="zmdi zmdi-plus"></i>add user</button>                                    
+        </div>
+    </div>
+    <div id="divtblResult" class="table-responsive ">
+		<table id="tblResult" class="table  table-top-campaign table-hover">
+		   <thead>
+				<tr>
+					<th width="4%" class="chkBox"></th>
+					<th data-priority="1" width="15%" style="text-align: left;" class="sorting">User ID</th>
+					<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Full Name</th>
+					<th data-priority="5" width="15%" style="text-align: left;" class="sorting">Email</th>
+					<th data-priority="6" width="7%" style="text-align: left;" class="sorting">Type</th>
+					<th data-priority="5" width="7%" style="text-align: left;" class="sorting">Status</th>
+					<th data-priority="6" width="20%" style="text-align: left;" class="sorting">Address</th>	
+					<th data-priority="1" width="1%">Action</th>																				
+				</tr>
+			</thead>
+			<tbody>											
+			</tbody>
+		</table>								
+	</div>	           
+
+	<script>
+		var searchFormObj;
+		var userTableObj;
+		var editFormObj;
+		$(document).ready(function() {
+			
+			var breadcrumb = new Array ( );
+			breadcrumb[0] = new Array ( 'Home', '#');			
+			breadcrumb[1] = new Array ( 'User Management', '');					
+			createBreadcrumb('breadcrumbDiv',breadcrumb); 
+			
+			var tableGroupObj= new TableClass();
+			tableGroupObj.type="checkbox";
+			tableGroupObj.bFilter=false;
+			tableGroupObj.bPaginate=false;			
+			tableGroupObj.bInfo=false;
+			tableGroupObj.order=1;	
+			tableGroupObj.tableId="#tblUserGroup";
+			tableGroupObj.getTableData="getGroupUserList";		
+			tableGroupObj.numberOfColumns=2;
+			tableGroupObj.checkAllId="#checkAllGroup";
+			
+			var dropdownListEdit = new Array ( );
+			dropdownListEdit[0] = new Array ( 'userType', 'USER_TYPE',false);	
+			dropdownListEdit[1] = new Array ( 'userStatus', 'USER_STATUS',false);	
+			editFormObj=new EditForm();
+			editFormObj.idFieldName="id";
+			editFormObj.editForm="#editModal";
+			editFormObj.getDropDownValue="getAllCategories";
+			editFormObj.dropdownList=dropdownListEdit;
+			editFormObj.getValuesToBind="getUser";
+			editFormObj.saveDataObject="addUser";
+			editFormObj.editFormHtml="user_edit.html";
+			editFormObj.saveButtonId=['#btnSave','userTableObj'];
+			editFormObj.dataTableListObj=[tableGroupObj]; 
+						
+			userTableObj= new TableClass();
+			userTableObj.type="edit";	
+			userTableObj.deleteController="deleteUsers";
+			userTableObj.editFormObj=editFormObj;		
+			userTableObj.tableId="#tblResult";
+			userTableObj.getTableData="/user_paginated";
+			userTableObj.buttonAddId="#btnAdd";	
+			userTableObj.bLazyTable=true;	
+			userTableObj.searchPlaceholder="Type here to search user . . .";	
+			userTableObj.loadTable();		
+			
+/*			This is for advance search but not able to load by paging.  		
+			
+			var dropdownListSearch = new Array ( );
+			dropdownListSearch[0] = new Array ( 'userStatusSearch', 'userStatus',true);			
+			searchFormObj=new EditForm();
+			searchFormObj.idFieldName="id";
+			searchFormObj.editForm="#searchName";
+			searchFormObj.searchButton=['#searchButton','searchFormObj'];
+			searchFormObj.getDropDownValue="getAllCategories";
+			searchFormObj.getValuesToBind="getUserSearchForm";
+			searchFormObj.dataTableListObj=[userTableObj];
+			searchFormObj.dropdownList=dropdownListSearch; 
+			searchFormObj.initiateForm(); 			
+ */		
+			});
+	</script>
+</body>
+</html>

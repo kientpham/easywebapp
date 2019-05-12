@@ -1520,7 +1520,7 @@
   try {
     var menu = $('.js-item-menu');
     var sub_menu_is_showed = -1;
-
+    
     for (var i = 0; i < menu.length; i++) {
       $(menu[i]).on('click', function (e) {
         e.preventDefault();
@@ -1538,7 +1538,7 @@
         }
       });
     }
-    $(".js-item-menu, .js-dropdown").click(function (event) {
+    $(".js-item-menu, .js-dropdown").click(function (event) {    	
       event.stopPropagation();
     });
 
@@ -1583,7 +1583,7 @@
     arrow.each(function () {
       var that = $(this);
       that.on('click', function (e) {
-        e.preventDefault();
+         e.preventDefault();
         that.find(".arrow").toggleClass("up");
         that.toggleClass("open");
         that.parent().find('.js-sub-list').slideToggle("250");

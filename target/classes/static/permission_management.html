@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+</head>
+
+<body >                        
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                	<div id="breadcrumbDiv" class="container breadcrumbDiv"></div>		                                    		
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <button id="btnAdd" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <i class="zmdi zmdi-plus"></i>add permission</button>                                    
+                                </div>
+                            </div>
+                            <div id="divtblResult" class="table-responsive ">
+								<table id="tblPermission" class="table  table-top-campaign table-hover">
+								   <thead>
+										<tr>
+											<th width="4%"></th>
+											<th data-priority="1" width="15%" style="text-align: left;" class="sorting">Permission</th>
+											<th data-priority="2" width="10%" style="text-align: left;" class="sorting">Type</th>
+											<th data-priority="2" width="5%" style="text-align: left;" class="sorting">Toggle</th>
+											<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Menu Path</th>
+											<th data-priority="3" width="30%" style="text-align: left;" class="sorting">Description</th>
+											<th data-priority="1" width="1%">Action</th>	
+										</tr>
+									</thead>
+									<tbody>											
+									</tbody>
+								</table>								
+							</div>
+                       
+
+   
+	<script>
+		var searchFormObj;
+		var permissionTableObj;
+		var editFormObj;
+		$(document).ready(function() {	
+				
+/* 		 	var divAndHtml = new Array ( );
+			//divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
+			divAndHtml[0] = new Array ( 'divCopyright', 'copyright.html');		
+			divAndHtml[1] = new Array ( 'divAlert', 'alert.html');				
+			loadHtml(divAndHtml);
+			buildLayout(); */
+			var breadcrumb = new Array ( );
+			breadcrumb[0] = new Array ( 'Home', '#');			
+			breadcrumb[1] = new Array ( 'Permission Management', '');					
+			createBreadcrumb('breadcrumbDiv',breadcrumb);
+			
+			var tableGoupPermissionObj= new TableClass();
+			tableGoupPermissionObj.type="checkbox";
+			tableGoupPermissionObj.bFilter=false;
+			tableGoupPermissionObj.bPaginate=false;			
+			tableGoupPermissionObj.bInfo=false;
+			tableGoupPermissionObj.order=1;	
+			tableGoupPermissionObj.tableId="#tblPermissionGroup";
+			tableGoupPermissionObj.getTableData="getGroupPermissionList";		
+			tableGoupPermissionObj.numberOfColumns=2;
+			tableGoupPermissionObj.checkAllId="#checkAllGroup";
+			
+			var dropdownListEdit = new Array ( );
+			dropdownListEdit[0] = new Array ( 'permissionType', 'PERMISSION_TYPE',false);				
+			editFormObj=new EditForm();
+			editFormObj.idFieldName="id";
+			editFormObj.editForm="#editPermission";
+			editFormObj.getDropDownValue="getAllCategories";
+			editFormObj.dropdownList=dropdownListEdit;
+			editFormObj.getValuesToBind="getPermission";
+			editFormObj.saveDataObject="savePermission";
+			editFormObj.editFormHtml="permission_edit.html";
+			editFormObj.saveButtonId=['#btnSave','permissionTableObj'];
+			editFormObj.dataTableListObj=[tableGoupPermissionObj]; 
+						
+			permissionTableObj= new TableClass();
+			permissionTableObj.type="edit";
+			permissionTableObj.bFilter=true;
+			permissionTableObj.bPaginate=true;
+			permissionTableObj.pageLength=3;
+			permissionTableObj.bInfo=true;
+			permissionTableObj.bLengthChange=true;
+			permissionTableObj.bLazyTable=false;	
+			permissionTableObj.tableId="#tblPermission";
+			//permissionTableObj.numberOfColumns=7;
+			permissionTableObj.getTableData="getPermissionTable";
+			permissionTableObj.order=1;
+			permissionTableObj.deleteController="deletePermission";
+			permissionTableObj.editFormObj=editFormObj;				
+			permissionTableObj.buttonAddId="#btnAdd";							
+			permissionTableObj.searchPlaceholder="Type here to search permission . . .";
+				
+			permissionTableObj.loadTable();	
+			
+ 			
+		});
+	</script>
+</body>
+</html>

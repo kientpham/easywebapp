@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Kien Pham">
+    <meta name="keywords" content="">
+    <!-- Title Page-->
+    <title>Easy Webapp</title>
+    <!-- Fontfaces CSS-->
+    
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">        
+    
+    <!-- Vendor CSS--> 
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+	<link href="vendor/responsive.dataTables.min.css" rel="stylesheet" type="text/css">	
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+	<link href="css/style.css" rel="stylesheet" media="all" type="text/css">
+</head>
+
+<body >
+    <div class="page-wrapper">        
+		<div id="headerDiv"></div>		
+        <!-- PAGE CONTENT-->
+        <div class="page-content--bgf7">
+			<div id="divAlert" class="container">
+				<div id="alertDiv" class="fixed maw400 hide alert au-alert-success alert-dismissible au-alert au-alert--70per" role="alert">
+					<i class="zmdi zmdi-check-circle"></i>
+					<span class="content"></span>					
+				</div>
+			</div>             
+            <!-- MAIN CONTENT-->
+            <section class="p-t-20">
+                <div class="container">
+                    <div class="row">
+                        <div id="divMainContent" class="col-md-12 top-campaign">                         
+                  
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- END MAIN CONTENT-->                    
+			<div id="divCopyright" class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="copyright">
+							<p>Copyright © 2019 Kien Pham. All rights reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>                      
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <!-- Main JS-->
+   <script type="text/javascript" src="js/main.js"></script>	
+	<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
+	<script type="text/javascript" src="js/autodatabinding.js"></script>
+	<script>
+		$(document).ready(function() {				
+		 	var divAndHtml = new Array ( );
+			divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
+			loadHtml(divAndHtml);			
+		});
+	</script>
+</body>
+</html>

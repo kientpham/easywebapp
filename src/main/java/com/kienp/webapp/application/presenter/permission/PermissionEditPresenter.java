@@ -55,8 +55,12 @@ public class PermissionEditPresenter {
 		Permission permission=new Permission();
 		permission.setId(permissionEdit.getId());
 		permission.setName(permissionEdit.getName());
+		permission.setToggle(permissionEdit.getToggle());
 		permission.setDescription(permissionEdit.getDescription());
 		permission.setType(permissionEdit.getPermissionType());
+		permission.setMenuPath(permissionEdit.getMenuPath());
+		permission.setUrl(permissionEdit.getUrl());
+		permission.setIcon(permissionEdit.getIcon());
 		permission.setGroups(groupService.getGroupListByIds(permissionEdit.getTblPermissionGroup()));		
 		return permission;
 	}

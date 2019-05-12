@@ -14,8 +14,16 @@ public class PermissionEdit {
 	private Integer id;
 
 	private String name;
+	
+	private Boolean toggle;
 
 	private Integer permissionType;
+	
+	private String menuPath;
+	
+	private String url;
+	
+	private String icon;
 		
 	private String description;
 	
@@ -28,7 +36,11 @@ public class PermissionEdit {
 	public PermissionEdit(Permission permission) {
 		this.id=permission.getId();
 		this.name=permission.getName();
+		this.toggle=permission.getToggle();
 		this.description=permission.getDescription();
-		this.permissionType=permission.getType();		
+		this.permissionType=permission.getType();	
+		this.url=permission.getUrl();
+		this.menuPath=permission.getMenuPath();
+		this.icon=permission.getIcon();
 	}	
 }

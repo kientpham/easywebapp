@@ -29,4 +29,6 @@ public interface UserService {
 	
 	public PagingOutputDTO<User> searchUser(PagingInputDTO pagingInput);
 	
+	public List<String> getListFeature(Integer userId);
+	
 }

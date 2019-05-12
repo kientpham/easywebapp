@@ -11,9 +11,6 @@ class TableClass{
 			}else{
 				this._tableId="#"+value;
 			}			
-		}	
-		set numberOfColumns(value){
-			this._numberOfColumns=value;
 		}
 		set getTableData(value){
 			this._getTableData=value;
@@ -42,8 +39,11 @@ class TableClass{
 		set bLengthChange(value){
 			this._bLengthChange=value;
 		}
-		set order(value){
-			this._order=value;
+		set ordering(value){
+			this._ordering=value;
+		}
+		set orderColumn(value){
+			this._orderColumn=value;
 		}
 		set displayIfNoData(value){
 			this._displayIfNoData=value;
@@ -75,22 +75,6 @@ class TableClass{
 			$(this._divTableData).addClass("hide");
 		}
 		
-		loadElement(){
-			if($('iconloading')!=null ){
-				 $('body').append('<div class="loadingProcess" id="iconloading"></div>');
-			}			
-			if($('edit-container')!=null){
-				 $('body').append('<div id="edit-container" class="modal-container"></div>');
-			}
-			if(this._editFormObj!=null ){				
-				$('#edit-container').load(this._editFormObj._editFormHtml);
-			}
-			
-			if(this._buttonAddId!=null){			
-					$(this._buttonAddId).click({editForm:this._editFormObj},callAddForm);
-			}
-		}
-		
 		loadTable(){				
 			this.loadElement();	
 			if(this._bLazyTable==true){			
@@ -114,34 +98,65 @@ class TableClass{
 			}
 		}
 		
+		loadElement(){
+			this.setDefaultValues();
+			if($('iconloading')!=null ){
+				 $('body').append('<div class="loadingProcess" id="iconloading"></div>');
+			}			
+			if($('edit-container')!=null){
+				 $('body').append('<div id="edit-container" class="modal-container"></div>');
+			}
+			if(this._editFormObj!=null ){				
+				$('#edit-container').load(this._editFormObj._editFormHtml);
+			}
+			
+			if(this._buttonAddId!=null){			
+					$(this._buttonAddId).click({editForm:this._editFormObj},callAddForm);
+			}
+		}
+		
+		setDefaultValues(){
+			this._numberOfColumns=$(this._tableId).find('tr')[0].cells.length;
+			if (this._bFilter==null){
+				this._bFilter=true;
+			}
+			if (this._bInfo ==null){
+				this._bInfo =true;
+			}
+			if(this._bLengthChange==null){
+				this._bLengthChange=true;
+			}
+			if(this._bPaginate==null){
+				this._bPaginate=true;
+			}
+			if (this._pageLength==null){
+				this._pageLength=10;
+			}
+			if (this._orderColumn==null){
+				this._orderColumn=1;
+			}	
+			
+			if (this._ordering==null){
+				this._ordering=true;
+			}
+			
+		}
+		
 		buildLazyTable(tableObj){
 			var tableObjectName;
 			var getTableData =this._getTableData;
 			if (tableObj._editFormObj!=null){
 				tableObjectName=tableObj._editFormObj._saveButtonId[1];
 			}
-			var dynamicColumn=getDataColumn(tableObjectName,this._numberOfColumns,this._type);
-					
+			var dynamicColumn=getDataColumn(tableObjectName,this._numberOfColumns,this._type);					
 		    var bFilter =this._bFilter;    
 		    var checkAllId=this._checkAllId;
-		    var bInfo=this._bInfo;
-		    if (bFilter==null){
-		    	bFilter=true;
-		    }
-		    if (bInfo==null){
-		    	bInfo=true;
-		    }
-		    var bPaginate=this._bPaginate;
-		    if (bPaginate==null){
-		    	bPaginate=true;
-		    }
+		    var bInfo=this._bInfo;		   
+		    var bPaginate=this._bPaginate;		   
 		    var pageLength=this._pageLength;		    
 		    var bLengthChange=this._bLengthChange;		    
-		    var order=this._order;
-		    var ordering =true;
-		    if(order==null){		    	
-		    	order=1;
-		    }    			
+		    var order=this._orderColumn;
+		    var ordering =this._ordering;	 			
 			var table=$(this._tableId);			
 			var dataTable=table.DataTable({	
 					"ordering" : ordering,
@@ -481,7 +496,7 @@ class EditForm{
 				 var columnsIn = result;			 
 			        for(var key in columnsIn){		 
 			        	var control= document.getElementById(key);
-			        	if (control !=null){
+			        	if (control !=null){			        		
 			        		if (control.type ==="checkbox"){			        			
 			        			control.checked=columnsIn[key];
 			        		}else{
@@ -527,6 +542,8 @@ class EditForm{
 			        	if (control !=null){			        		
 			        		if (control.nodeName ==="TABLE"){			        			
 			        			columnsIn[key]=getAllSelected(control.id);			   
+			        		}else if (control.type ==="checkbox"){
+			        			columnsIn[key]=control.checked;
 			        		}else{
 			        			columnsIn[key]=control.value;
 			        		}		        		
@@ -567,9 +584,8 @@ class EditForm{
 //--------------------------------------------
 
 function getDataColumn(tableObjectName,numberOfColumns,type){
-	var dynamicColumns=[];
-
-	dynamicColumns.length=numberOfColumns;		
+	var dynamicColumns=[];	
+	dynamicColumns.length=numberOfColumns;
 
     var n=numberOfColumns-1;
     if(type==null){    	
@@ -646,27 +662,12 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
     var bFilter =tableObj._bFilter;    
     var checkAllId=tableObj._checkAllId;
     var bInfo=tableObj._bInfo;
-    if (bFilter==null){
-    	bFilter=true;
-    }
-    if (bInfo==null){
-    	bInfo=true;
-    }
-    var bPaginate=tableObj._bPaginate;
-    if (bPaginate==null){
-    	bPaginate=true;
-    }
-    var pageLength=this._pageLength;
+    var bPaginate=tableObj._bPaginate;   
+    var pageLength=tableObj._pageLength;    
+    var bLengthChange=tableObj._bLengthChange;
+    var order=tableObj._orderColumn;    
+    var ordering =tableObj._ordering;
     
-    var bLengthChange=this._bLengthChange;
-    var order=tableObj._order;
-    
-    var ordering =true;
-    if(order!=null){
-    	ordering=false;    	
-    }else {
-    	order=1;
-    }    
     var dataTable=table.DataTable({
 	"ordering" : ordering,
 	"order": [[ order, "asc" ]],
@@ -680,8 +681,7 @@ function buildTable(tableObj, dynamicColumns,rowDataSet){
     "columns": dynamicColumns,
     "responsive": true,
     "retrieve": true
-    });
-    
+    });    
 	dataTable.clear().draw();
 	dataTable.rows.add(rowDataSet).draw();
 	
@@ -798,6 +798,149 @@ function loadHtml(divAndHtmlList){
 	for (var i=0;i< divAndHtmlList.length;i++){	
 		$('#'+divAndHtmlList[i][0]).load(divAndHtmlList[i][1]);
 	}	
+}
+
+function loadHtmlPageToDiv(divContent, html){	
+	$(divContent).load(html);	
+    return false;
+}
+
+class NavMenuItem{
+	constructor(){			
+	}
+	set displayText(value){
+		this._displayText=value;
+	}	
+	set itemId(value){
+		this._itemId=value;
+	}
+	set htmlPage(value){
+		this._htmlPage=value;
+	}	
+	set iconClass(value){
+		this._iconClass=value;
+	}	
+	set listChildItems(value){
+		this._listChildItems=value;
+	}	
+}
+function openSubMenuItem(subMenuItemId){	
+	var that=$('#'+subMenuItemId);	
+	that.find(".arrow").toggleClass("up");
+    that.toggleClass("open");
+    that.parent().find('.js-sub-list').slideToggle("250");
+	return false;
+}
+
+function buildNavigationBar(divMainContent,isMobile, arrMenuItem,isLeftNavbar){
+	var ulNavbarClass='';	
+	var ulMenuClass='header3-sub-list';
+	var liClass='';
+	var aClass='';
+	
+	if(isMobile){
+		ulNavbarClass='navbar-mobile__list';
+		ulMenuClass='navbar-mobile-sub__list js-sub-list';
+		aClass='js-arrow';
+	}else if(isLeftNavbar){
+		ulNavbarClass='navbar__list';
+		ulMenuClass='navbar__sub-list js-sub-list';
+		liClass='active';
+		aClass='js-arrow';
+	}
+	var html='<ul class="list-unstyled '+ulNavbarClass +'">';
+	for (var i=0;i<arrMenuItem.length;i++){
+		var menuItem=arrMenuItem[i];
+			
+		var itemId=menuItem._itemId;
+		if(isMobile){
+			itemId+='Mobile';
+		}
+		var onclickStr='onclick="return openSubMenuItem(\''+itemId+'\');"';	
+		if (menuItem._htmlPage!=null && menuItem._listChildItems==null ){			
+			onclickStr='onclick="return loadHtmlPageToDiv(\''+ divMainContent+'\',\''+menuItem._htmlPage+'\')"';
+		}
+		var htmlMenu='<li id="'+itemId+ '" class="has-sub hide '+liClass+'">';
+		htmlMenu+='<a href="#" class="'+aClass + '" '+ onclickStr+'>';
+		htmlMenu+='<i class="fas '+menuItem._iconClass +'"></i>'+menuItem._displayText;
+		htmlMenu+='<span class="bot-line"></span>';
+		htmlMenu+='</a>';
+		if (menuItem._listChildItems ==null){
+			htmlMenu=htmlMenu.replace(/has-sub/,'');
+		}else{
+			htmlMenu+='<ul class="list-unstyled '+ulMenuClass+'">';
+			for (var j=0; j<menuItem._listChildItems.length;j++){
+				var childItem=menuItem._listChildItems[j];
+				var onclickChild='';		
+				if (childItem._htmlPage!=null){
+					onclickChild='onclick="return loadHtmlPageToDiv(\''+ divMainContent+'\',\''+childItem._htmlPage+'\')"';
+				}
+				var childItemId=childItem._itemId;
+				if(isMobile){
+					childItemId+='Mobile';
+				}
+				htmlMenu+='<li  id="'+childItemId+'" class="">';//hide
+				htmlMenu+='<a href="#" '+onclickChild +'>'+childItem._displayText +'</a>';
+				htmlMenu+='</li>';
+			}
+			htmlMenu+='</ul>';
+		}
+		htmlMenu+='</li>';	
+		html+=htmlMenu;
+	}
+	html+='</ul>';	
+	if(isLeftNavbar){
+		html='<nav class="navbar-sidebar">' +html + '</nav>';
+	}
+	return html;	
+}
+
+//To be delete this
+function buildLayout(){
+	$.ajax({
+		type : "GET",
+		url : "/buildLayout",		
+		dataType: 'html',
+        contentType: 'application/json; charset=utf-8',
+		beforeSend : function() {
+			$("body").addClass("loading");
+		},
+		success : function(result) {
+			 
+			$('#headerDiv').html(result);				
+		},
+		error: function(xhr, status, error) {	
+		      //alert(xhr.status + ' ' + error);		        
+			//showErrorMessage();
+		},
+		complete: function(data, textStatus, xhr) {
+			$("body").removeClass("loading");
+		}
+	});	
+}
+
+function buildMenu(){
+	$.ajax({
+		type : "GET",
+		url : "/buildMenu",		
+		dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+		beforeSend : function() {
+			$("body").addClass("loading");
+		},
+		success : function(result) {	
+			 var list = result;
+			   $.each(list, function (index, item) {
+				   $('#'+item).removeClass("hide");
+				   $('#'+item+'Mobile').removeClass("hide");			
+			   });			
+		},
+		error: function(xhr, status, error) {
+		},
+		complete: function(data, textStatus, xhr) {
+			$("body").removeClass("loading");
+		}
+	});	
 }
 
 function createBreadcrumb(breadcrumbDiv, itemAndLinkList){

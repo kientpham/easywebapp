@@ -27,8 +27,20 @@ public class Permission {
 	@Column(name="PERMISSION_ID")
 	private Integer id;
 	
-	@Column(name="PERMISSION_NAME")
+	@Column(name="NAME")
 	private String name;
+	
+	@Column(name="TOGGLE")
+	private Boolean toggle;
+	
+	@Column(name="MENUPATH")
+	private String menuPath;
+	
+	@Column(name="URL")
+	private String url;
+	
+	@Column(name="ICON")
+	private String icon;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
@@ -36,7 +48,7 @@ public class Permission {
 	@Column(name="TYPE")
 	private Integer type;
 	
-	@ManyToMany//(mappedBy="permissions")
+	@ManyToMany
 	@JoinTable(
 			  name="GROUP_PERMISSION_JOIN",
 			  joinColumns= @JoinColumn(name="PERMISSION_ID"),

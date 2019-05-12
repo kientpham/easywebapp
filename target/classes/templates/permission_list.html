@@ -9,7 +9,7 @@
     <meta name="author" content="Kien Pham">
     <meta name="keywords" content="">
     <!-- Title Page-->
-    <title>Group Management</title>
+    <title>Permission Management</title>
     <!-- Fontfaces CSS-->
     
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -39,10 +39,10 @@
 
 <body >
     <div class="page-wrapper">        
-		<div id="headerDiv"></div>		
+		<div id="headerDiv" ></div>		
         <!-- PAGE CONTENT-->
         <div class="page-content--bgf7">            
-						
+			<div id="asideHeader"></div>			
 			<div id="divAlert" class="container"></div>             
             <!-- DATA TABLE-->
             <section class="p-t-20">
@@ -63,9 +63,11 @@
 								   <thead>
 										<tr>
 											<th width="4%"></th>
-											<th data-priority="1" width="20%" style="text-align: left;" class="sorting">Permission</th>
-											<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Type</th>
-											<th data-priority="3" width="50%" style="text-align: left;" class="sorting">Description</th>
+											<th data-priority="1" width="15%" style="text-align: left;" class="sorting">Permission</th>
+											<th data-priority="2" width="10%" style="text-align: left;" class="sorting">Type</th>
+											<th data-priority="2" width="5%" style="text-align: left;" class="sorting">Toggle</th>
+											<th data-priority="2" width="25%" style="text-align: left;" class="sorting">Menu Path</th>
+											<th data-priority="3" width="30%" style="text-align: left;" class="sorting">Description</th>
 											<th data-priority="1" width="1%">Action</th>	
 										</tr>
 									</thead>
@@ -112,11 +114,11 @@
 		$(document).ready(function() {	
 				
 		 	var divAndHtml = new Array ( );
-			divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
-			divAndHtml[1] = new Array ( 'divCopyright', 'copyright.html');		
-			divAndHtml[2] = new Array ( 'divAlert', 'alert.html');				
+			//divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
+			divAndHtml[0] = new Array ( 'divCopyright', 'copyright.html');		
+			divAndHtml[1] = new Array ( 'divAlert', 'alert.html');				
 			loadHtml(divAndHtml);
-			
+			buildLayout();
 			var breadcrumb = new Array ( );
 			breadcrumb[0] = new Array ( 'Home', '#');			
 			breadcrumb[1] = new Array ( 'Permission Management', '');					
@@ -155,7 +157,7 @@
 			permissionTableObj.bLengthChange=true;
 			permissionTableObj.bLazyTable=false;	
 			permissionTableObj.tableId="#tblPermission";
-			permissionTableObj.numberOfColumns=5;
+			permissionTableObj.numberOfColumns=7;
 			permissionTableObj.getTableData="getPermissionTable";
 			permissionTableObj.order=1;
 			permissionTableObj.deleteController="deletePermission";
