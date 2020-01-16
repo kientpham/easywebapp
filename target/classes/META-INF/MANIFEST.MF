@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: base-webapp
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: jm838d
+Built-By: trung
 Implementation-Vendor-Id: com.datatransforming
-Build-Jdk: 1.8.0_162
+Build-Jdk: 1.8.0_131
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/base-webapp
 Created-By: Maven Integration for Eclipse
