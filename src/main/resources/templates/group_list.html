@@ -128,23 +128,34 @@
 			tablePermissionObj.bPaginate=false;			
 			tablePermissionObj.bInfo=false;
 			tablePermissionObj.order=1;	
-			tablePermissionObj.tableId="#tblPermissionGroup";
-			tablePermissionObj.getTableData="getPermissionGroupList";		
+			tablePermissionObj.tableId="#permissions";
+			tablePermissionObj.getTableData="/userservice/groups/permissionjoinlistdto";		
 			tablePermissionObj.numberOfColumns=2;
 			tablePermissionObj.checkAllId="#checkAllPermission";
+
+			var tableUserObj= new TableClass();
+			tableUserObj.type="checkbox";
+			tableUserObj.bFilter=false;
+			tableUserObj.bPaginate=false;			
+			tableUserObj.bInfo=false;
+			tableUserObj.order=1;	
+			tableUserObj.tableId="#users";
+			tableUserObj.getTableData="/userservice/groups/userjoinlistdto";		
+			tableUserObj.numberOfColumns=5;
+			tableUserObj.checkAllId="#checkAllUser";
 			
 			var dropdownListEdit = new Array ( );
-			dropdownListEdit[0] = new Array ( 'groupStatus', 'GROUP_STATUS',false);				
+			dropdownListEdit[0] = new Array ( 'status', 'GROUP_STATUS',false);				
 			editFormObj=new EditForm();
 			editFormObj.idFieldName="id";
 			editFormObj.editForm="#editGroup";
-			editFormObj.getDropDownValue="getAllCategories";
+			editFormObj.getDropDownValue="/shareservice/lookups/lookuptabledto";
 			editFormObj.dropdownList=dropdownListEdit;
-			editFormObj.getValuesToBind="getGroup";
-			editFormObj.saveDataObject="saveGroup";
+			editFormObj.getValuesToBind="/userservice/groups/groupeditdto";
+			editFormObj.saveDataObject="/userservice/groups/groupeditdto";
 			editFormObj.editFormHtml="group_edit.html";
 			editFormObj.saveButtonId=['#btnSave','groupTableObj'];
-			editFormObj.dataTableListObj=[tablePermissionObj]; 
+			editFormObj.dataTableListObj=[tablePermissionObj,tableUserObj]; 
 						
 			groupTableObj= new TableClass();
 			groupTableObj.type="edit";
@@ -156,9 +167,9 @@
 			groupTableObj.bLazyTable=false;	
 			groupTableObj.tableId="#tblGroup";
 			groupTableObj.numberOfColumns=5;
-			groupTableObj.getTableData="getAllGroup";
+			groupTableObj.getTableData="/userservice/groups/grouptabledto";
 			groupTableObj.order=1;
-			groupTableObj.deleteController="deleteGroups";
+			groupTableObj.deleteController="/userservice/groups/";
 			groupTableObj.editFormObj=editFormObj;				
 			groupTableObj.buttonAddId="#btnAdd";							
 			groupTableObj.searchPlaceholder="Type here to search group . . .";

@@ -173,7 +173,7 @@ class TableClass{
 			        "serverSide": true,			        
 			        "pageLength": pageLength,			        
 			        "columns":dynamicColumn,
-				   "ajax": {
+				    "ajax": {
 		               "url": getTableData,
 		               "type": "POST",
 		               "contentType" : "application/json; charset=utf-8",			    
@@ -196,14 +196,14 @@ class TableClass{
 			var tableObjectName;
 			if (tableObj._editFormObj!=null){
 				tableObjectName=tableObj._editFormObj._saveButtonId[1];
-			}
+			}			
 			$.ajax({
-				type : "POST",
+				type : "GET",
 				url : getTableData, 
 				contentType : "application/json; charset=utf-8",
 				async: false,
 				dataType : "json",
-				data:JSON.stringify(jsonObj),
+				data:jsonObj,
 				beforeSend : function() {					
 					$("body").addClass("loading");
 				},
@@ -212,7 +212,7 @@ class TableClass{
 					var dynamicColumn=getDataColumn(tableObjectName,numberOfColumns,type);				
 					buildTable(tableObj,dynamicColumn,rowDataSet);
 				},
-				error: function(xhr, errorType, exception) {	
+				error: function(xhr, errorType, exception) {				
 					alert(xhr.responseText);					
 					showErrorMessage();
 				},
@@ -221,19 +221,19 @@ class TableClass{
 				}
 			});
 		} // End call Ajax method
-
-		deleteRecord(listId){		
+		
+		deleteRecord(id){
 			var deleteController= this._deleteController;
 			$.ajax({
-				type : "POST",
+				type : "DELETE",
 				url : deleteController, 
-				data: JSON.stringify(listId),
+				data: JSON.stringify(id),
 				async: false,
 				contentType : "application/json; charset=utf-8",
 				success : function(data) {
 					callAlert("Deleted successfully!");
 				},
-				error: function (jqXHR, exception) {
+				error: function (jqXHR, exception) {					
 					showErrorMessage();
 					return false;
 		        },
@@ -245,7 +245,7 @@ class TableClass{
 			return true;
 		}
 		
-		deleteRecords() {			
+		deleteSelectedRecords() {			
 			var selected = this.getAllSelected();			
 			deleteRecord(selected, this._deleteController)
 		}
@@ -312,7 +312,7 @@ class EditForm{
 	openAddModal(){	
 		
 		$(this._editForm).modal("show");
-		this.openEditModal(0);
+		this.openEditModal(null);
 		//this.initiateForm();
 	}
 	
@@ -325,11 +325,13 @@ class EditForm{
 		this.initiateForm();		
 		if (this._idFieldName==null){
 			this._idFieldName="id";
-		}		
-		this.bindValueToFields(this._idFieldName,this._getValuesToBind, recordId);		
+		}	
+		var jsonObj=this._idFieldName;
+		if (recordId!=null){
+			jsonObj=jsonObj+'='+recordId;
+		}
+		this.bindValueToFields(this._idFieldName,this._getValuesToBind, jsonObj);		
 		if (this._dataTableListObj!=null){
-			//var jsonObj=this._idFieldName+'='+recordId;
-			var jsonObj=recordId;
 			this.loadAllTables(jsonObj);	
 		}			
 	}
@@ -394,13 +396,14 @@ class EditForm{
 			url : getDropDownValue, 
 			contentType : "application/json; charset=utf-8",
 			dataType : "json",
+			async: false,
 			success : function(response) {
 				var len = response.length;
 	            for(var i=0; i<len; i++){	            	
-	            	var catGroup = response[i].categoryGroup;	     
+	            	var lookupType = response[i].lookupType;	            	
 	            	var dropdownLen = dropdownList.length;
 	            	for (var j=0;j<dropdownLen;j++){
-	            		if (dropdownList[j][1]==catGroup){
+	            		if (dropdownList[j][1]==lookupType){
 	            			var controlid=dropdownList[j][0];
 	            			var dropdown = document.getElementById(controlid);
 	    	            	if (dropdown!=null){
@@ -488,21 +491,24 @@ class EditForm{
 			type : "GET",
 			url : getValuesToBind,
 			contentType : "application/json; charset=utf-8",
-			data : idFieldName + "=" +recordId,
+			data : recordId,
 			beforeSend : function() {
 				$("body").addClass("loading");
 			},
 			success : function(result) {					
 				 var columnsIn = result;			 
-			        for(var key in columnsIn){		 
-			        	var control= document.getElementById(key);
-			        	if (control !=null){			        		
-			        		if (control.type ==="checkbox"){			        			
-			        			control.checked=columnsIn[key];
-			        		}else{
-			        			control.value=columnsIn[key];
-			        		}		        		
-			        	}		            
+			        for(var key in columnsIn){
+			        	
+			        	if (key!=null){
+				        	var control= document.getElementById(key);				        	
+				        	if (control !=null){			        		
+				        		if (control.type ==="checkbox"){			        			
+				        			control.checked=columnsIn[key];
+				        		}else{
+				        			control.value=columnsIn[key];			        			
+				        		}		        		
+				        	}		       
+			        	}
 			        } 
 			},
 			error: function(event, status, xhr) {	
@@ -545,6 +551,7 @@ class EditForm{
 			        		}else if (control.type ==="checkbox"){
 			        			columnsIn[key]=control.checked;
 			        		}else{
+			        			alert(columnsIn[key] + ' ' +control.value);
 			        			columnsIn[key]=control.value;
 			        		}		        		
 			        	}		            
@@ -746,9 +753,9 @@ function callDeleteDialog(id,tableObj){
 	if ($("#btnSubmit")!=null){
 		$("#btnSubmit").off("click");	
 		$("#btnSubmit").click({id:id,tableObj:tableObj},function(event){			
-			var listId=[];
-			listId.push(event.data.id);
-			event.data.tableObj.deleteRecord(listId);
+//			var listId=[];
+//			listId.push(event.data.id);
+			event.data.tableObj.deleteRecord(event.data.id);
 			$("#confirmModal").modal('toggle');
 		});	
 	}	
