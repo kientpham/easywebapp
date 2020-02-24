@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Map;
+import java.util.UUID;
 
 import com.kientpham.webapp.userservice.user.User;
 import com.kientpham.webapp.userservice.user.UserDomain;
@@ -39,7 +40,7 @@ public class UserReadServiceImpl implements UserReadService{
 	private UserDomain userDomain;
 
 	@Override
-	public UserEditDTO getUserEditDTOById(Integer id) {
+	public UserEditDTO getUserEditDTOById(UUID id) {
 		return new UserEditDTO(userDomain.findById(id));
 	}
 
@@ -61,14 +62,14 @@ public class UserReadServiceImpl implements UserReadService{
 	private GroupDomain groupDomain;
 
 	@Override
-	public List<GroupJoinListDTO> getGroupJoinListDTO(Integer userId) {
-		if (userId!=null) {
+	public List<GroupJoinListDTO> getGroupJoinListDTO(UUID userId) {
+		if (userId !=null) {
 			return groupDomain.getGroupJoinListDTO(userDomain.findById(userId).getGroups().stream().map(Group::getId).collect(Collectors.toSet()));
 		}
 		return groupDomain.getGroupJoinListDTO(null);
 	}
 @Override
-	public List<String> getListFeature(Integer userId) {
+	public List<String> getListFeature(UUID userId) {
 		User user = userDomain.findById(userId);
 		List<Group> groupList = user.getGroups();
 		List<Permission> permissionList = new ArrayList<Permission>();
@@ -95,13 +96,18 @@ public class UserReadServiceImpl implements UserReadService{
 	Map<Integer, String> columnMap = new HashMap<Integer, String>() {
 		private static final long serialVersionUID = 1L;
 		{
-			put(1, "username");
-			put(2, "firstName");
-			put(3, "lastName");
-			put(4, "email");
-			put(5, "userType");
-			put(6, "status");
-			put(7, "address");
+			put(1, "id");
+			put(2, "username");
+			put(3, "password");
+			put(4, "firstName");
+			put(5, "lastName");
+			put(6, "birthDate");
+			put(7, "email");
+			put(8, "userType");
+			put(9, "status");
+			put(10, "address");
+			put(11, "lastUpdated");
+			put(12, "created");
 		}
 	};
 

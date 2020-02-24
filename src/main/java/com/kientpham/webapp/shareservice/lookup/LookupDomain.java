@@ -38,6 +38,9 @@ public class LookupDomain{
 
 	public Lookup getLookupEntity(LookupEditDTO lookupEditDTO) {
 		Lookup lookup=new Lookup();
+		if (lookupEditDTO.getId()==null) {
+			lookupEditDTO.setId(lookupEditDTO.hashCode());
+					}
 		lookup.setId(lookupEditDTO.getId());
 		lookup.setLookupType(lookupEditDTO.getLookupType());
 		lookup.setValue(lookupEditDTO.getValue());

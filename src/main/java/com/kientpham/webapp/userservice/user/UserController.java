@@ -2,6 +2,7 @@ package com.kientpham.webapp.userservice.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,11 +33,11 @@ public class UserController{
 	}
 
 	@RequestMapping(value="/groupjoinlistdto", method=RequestMethod.GET)
-	public List<GroupJoinListDTO> getGroupJoinListDTO(@RequestParam Integer id){
+	public List<GroupJoinListDTO> getGroupJoinListDTO(@RequestParam UUID id){
 		return userReadService.getGroupJoinListDTO(id);
 	}
 	@RequestMapping(value="usereditdto",method=RequestMethod.GET)
-	public ResponseEntity<UserEditDTO> getusereditdto(@RequestParam Integer id){
+	public ResponseEntity<UserEditDTO> getusereditdto(@RequestParam UUID id){
 		return new ResponseEntity<UserEditDTO>(userReadService.getUserEditDTOById(id),HttpStatus.OK);
 	}
 
@@ -47,7 +48,7 @@ public class UserController{
 	}
 
 	@RequestMapping(method=RequestMethod.DELETE)
-	public String deleteUser(@RequestBody(required=true) Integer id) {
+	public String deleteUser(@RequestBody(required=true) UUID id) {
 		userWriteService.deleteUserById(id);
 		return "Successfully";
 	}

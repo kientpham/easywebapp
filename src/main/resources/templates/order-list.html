@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- Title Page-->
+    <title>Order Management</title>
+    <!-- Fontfaces CSS-->
+    
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+        
+    
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+	<link href="vendor/responsive.dataTables.min.css" rel="stylesheet" type="text/css">
+	
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+	<link href="css/style.css" rel="stylesheet" media="all" type="text/css">
+
+</head>
+<body>
+	 <div class="page-wrapper"> 
+ <div id="headerDiv"></div> 
+ <!-- PAGE CONTENT-->
+ <div class="page-content--bgf7"> 
+ 
+ <div id="divAlert" class="container"></div> 
+ <!-- DATA TABLE-->
+ <section class="p-t-20">
+ <div class="container">
+ <div class="row">
+ <div class="col-md-12 top-campaign"> 
+ <div class="table-data__tool">
+ <div class="table-data__tool-left">
+ <div id="breadcrumbDiv" class="container breadcrumbDiv"></div> 
+ </div>
+ <div class="table-data__tool-right">
+ <button id="btnAdd" class="au-btn au-btn-icon au-btn--green	 au-btn--small">
+ <i class="zmdi zmdi-plus"></i>add order</button> 
+ </div>
+ </div>
+ <div id="divtblResult" class="table-responsive ">
+ <table id="tblOrder" class="table table-top-campaign	 table-hover">
+ <thead>
+ <tr>
+ <th width="4%;"></th>
+ 
+		<th data-priority="1"  style="text-align: left;" class="sorting">Number </th>
+		<th data-priority="2"  style="text-align: left;" class="sorting">Total Price </th>
+		<th data-priority="3"  style="text-align: left;" class="sorting">Status </th>
+		<th data-priority="4"  style="text-align: left;" class="sorting">User Id </th> <th data-priority="1" width="1&#37;">Action</th>
+ </tr> </thead>
+ <tbody>
+ </tbody>
+ </table> 
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+ <!-- END DATA TABLE--> 
+ <div id="divCopyright" class="container"></div> 
+ </div>
+ </div>
+<!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <!-- Main JS-->
+    <script type="text/javascript" src="js/main.js"></script>	
+	<script type="text/javascript" src="vendor/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="vendor/dataTables.responsive.min.js"></script>
+	<script type="text/javascript" src="js/autodatabinding.js"></script>	<script>		
+		var orderTableObj;
+		var editFormObj;
+		$(document).ready(function() {	
+				
+		 	var divAndHtml = new Array ( );
+			divAndHtml[0] = new Array ( 'headerDiv', 'header.html');			
+			divAndHtml[1] = new Array ( 'divCopyright', 'copyright.html');		
+			divAndHtml[2] = new Array ( 'divAlert', 'alert.html');				
+			loadHtml(divAndHtml);
+			
+			var breadcrumb = new Array ( );
+			breadcrumb[0] = new Array ( 'Home', '#');			
+			breadcrumb[1] = new Array ( 'Order Management', '');					
+			createBreadcrumb('breadcrumbDiv',breadcrumb);			
+			var tableOrderItemObj= new TableClass();
+			tableOrderItemObj.type="checkbox";
+			tableOrderItemObj.bFilter=false;
+			tableOrderItemObj.bPaginate=true;
+			tableOrderItemObj.pageLength=10;
+			tableOrderItemObj.bLengthChange=false;
+			tableOrderItemObj.bInfo=false;
+			tableOrderItemObj.order=1;
+			tableOrderItemObj.tableId="#orderitems";
+			tableOrderItemObj.getTableData="/orderservice/orders/orderitemjoinlistdto";
+			tableOrderItemObj.numberOfColumns=2;
+			tableOrderItemObj.checkAllId="#checkAllOrderItem";
+
+			var dropdownListEdit = new Array ( );
+			dropdownListEdit[0] = new Array ( 'status', 'ORDER_STATUS',false);
+			editFormObj=new EditForm();
+			editFormObj.idFieldName="id";
+			editFormObj.editForm="#editOrder";
+			editFormObj.getDropDownValue="/shareservice/lookups/lookuptabledto";
+			editFormObj.dropdownList=dropdownListEdit;
+			editFormObj.getValuesToBind="/orderservice/orders/ordereditdto";
+			editFormObj.saveDataObject="/orderservice/orders/ordereditdto";
+			editFormObj.editFormHtml="order-edit.html";
+			editFormObj.saveButtonId=['#btnSave','orderTableObj'];
+			editFormObj.dataTableListObj=[tableOrderItemObj];
+
+			orderTableObj= new TableClass();
+			orderTableObj.type="edit";
+			orderTableObj.bFilter=true;
+			orderTableObj.bPaginate=true;
+			orderTableObj.pageLength=25;
+			orderTableObj.bInfo=true;
+			orderTableObj.bLengthChange=true;
+			orderTableObj.bLazyTable=false;	
+			orderTableObj.tableId="#tblOrder";
+			orderTableObj.numberOfColumns=2;
+			orderTableObj.getTableData="/orderservice/orders/ordertabledto";
+			orderTableObj.order=1;
+			orderTableObj.deleteController="/orderservice/orders/";
+			orderTableObj.editFormObj=editFormObj;				
+			orderTableObj.buttonAddId="#btnAdd";							
+			orderTableObj.searchPlaceholder="Type here to search order . . .";
+				
+			orderTableObj.loadTable();	;
+		});
+	</script>
+</body>
+</html>

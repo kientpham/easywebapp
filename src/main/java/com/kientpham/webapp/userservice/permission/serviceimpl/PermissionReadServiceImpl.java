@@ -23,7 +23,7 @@ public class PermissionReadServiceImpl implements PermissionReadService{
 	private PermissionDomain permissionDomain;
 
 	@Override
-	public PermissionEditDTO getPermissionEditDTOById(Integer id) {
+	public PermissionEditDTO getPermissionEditDTOById(String id) {
 		return new PermissionEditDTO(permissionDomain.findById(id));
 	}
 
@@ -45,8 +45,8 @@ public class PermissionReadServiceImpl implements PermissionReadService{
 	private GroupDomain groupDomain;
 
 	@Override
-	public List<GroupJoinListDTO> getGroupJoinListDTO(Integer permissionId) {
-		if (permissionId!=null) {
+	public List<GroupJoinListDTO> getGroupJoinListDTO(String permissionId) {
+		if (!permissionId.isEmpty()) {
 			return groupDomain.getGroupJoinListDTO(permissionDomain.findById(permissionId).getGroups().stream().map(Group::getId).collect(Collectors.toSet()));
 		}
 		return groupDomain.getGroupJoinListDTO(null);

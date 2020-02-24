@@ -9,9 +9,9 @@ import com.kientpham.webapp.userservice.permission.Permission;
 import com.kientpham.webapp.userservice.permission.PermissionDomain;
 import com.kientpham.webapp.userservice.permission.PermissionWriteService;
 import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionEditDTO;
+import com.kientpham.webapp.commonlib.userserviceclient.dto.GroupJoinListDTO;
 import com.kientpham.webapp.userservice.group.Group;
 import com.kientpham.webapp.userservice.group.GroupDomain;
-import com.kientpham.webapp.commonlib.userserviceclient.dto.GroupJoinListDTO;
 import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionTableDTO;
 import com.kientpham.webapp.shareservice.lookup.LookupReadService;
 
@@ -28,13 +28,13 @@ public class PermissionWriteServiceImpl implements PermissionWriteService{
 	private GroupDomain groupDomain;
 
 	@Override
-	public void deletePermissionById(Integer id) {
+	public void deletePermissionById(String id) {
 		permissionDomain.deleteById(id);		
 	}
 
 	@Override
-	public void deleteListPermission(List<Integer> ids) {
-		for (Integer id:ids) {
+	public void deleteListPermission(List<String> ids) {
+		for (String id:ids) {
 			permissionDomain.deleteById(id);
 		}		
 	}
@@ -43,7 +43,7 @@ public class PermissionWriteServiceImpl implements PermissionWriteService{
 	public PermissionEditDTO savePermission(PermissionEditDTO permissionEditDTO) {
 		Permission permission=permissionDomain.getPermissionEntity(permissionEditDTO);
 		permission.setGroups(groupDomain.findByListIds(permissionEditDTO.getGroups()));
-;		permissionDomain.save(permission);
+		permissionDomain.save(permission);
 		return permissionEditDTO;
 	}
 }

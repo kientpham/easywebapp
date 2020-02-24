@@ -2,6 +2,8 @@ package com.kientpham.webapp.userservice.user;
 import java.util.Set;
 import java.util.ArrayList;
 import com.kientpham.webapp.commonlib.userserviceclient.dto.UserJoinListDTO;
+import com.kientpham.webapp.commonlib.utils.DateStringUtils;
+import java.util.UUID;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ public class UserDomain{
 	private UserDBGateway dbGateway;
 	
 
-	public List<UserJoinListDTO> getUserJoinListDTO(Set<Integer> ids) {
+	public List<UserJoinListDTO> getUserJoinListDTO(Set<UUID> ids) {
 		List<UserJoinListDTO> returnList=new ArrayList<UserJoinListDTO>(); 
 		List<User> allUser=this.findAll(); 
 		for (User user: allUser) {
@@ -42,16 +44,16 @@ public class UserDomain{
 		return dbGateway.findAll();
 	}
 	
-	public List<User> findByListIds(List<Integer> ids){
+	public List<User> findByListIds(List<UUID> ids){
 		return dbGateway.findByListIds(ids);
 	}
 	
-	public User findById(Integer id) {
+	public User findById(UUID id) {
 		if (id==null) return null;
 		return dbGateway.findById(id);
 	}
 
-	public void deleteById(Integer id) {
+	public void deleteById(UUID id) {
 		dbGateway.deleteById(id);
 	}
 	
@@ -61,15 +63,21 @@ public class UserDomain{
 
 	public User getUserEntity(UserEditDTO userEditDTO) {
 		User user=new User();
+		if (userEditDTO.getId()==null) {
+						userEditDTO.setCreated(DateStringUtils.getCurentTimeUTC());
+		}
 		user.setId(userEditDTO.getId());
 		user.setUsername(userEditDTO.getUsername());
 		user.setPassword(userEditDTO.getPassword());
 		user.setFirstName(userEditDTO.getFirstName());
 		user.setLastName(userEditDTO.getLastName());
+		user.setBirthDate(userEditDTO.getBirthDate());
 		user.setEmail(userEditDTO.getEmail());
 		user.setUserType(userEditDTO.getUserType());
 		user.setStatus(userEditDTO.getStatus());
 		user.setAddress(userEditDTO.getAddress());
+		user.setLastUpdated(DateStringUtils.getCurentTimeUTC());
+		user.setCreated(userEditDTO.getCreated());
 		return user;
 	}
 

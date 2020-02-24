@@ -50,7 +50,7 @@ public class GroupReadServiceImpl implements GroupReadService{
 
 	@Override
 	public List<UserJoinListDTO> getUserJoinListDTO(Integer groupId) {
-		if (groupId!=null) {
+		if (groupId !=null) {
 			return userDomain.getUserJoinListDTO(groupDomain.findById(groupId).getUsers().stream().map(User::getId).collect(Collectors.toSet()));
 		}
 		return userDomain.getUserJoinListDTO(null);
@@ -61,7 +61,7 @@ public class GroupReadServiceImpl implements GroupReadService{
 
 	@Override
 	public List<PermissionJoinListDTO> getPermissionJoinListDTO(Integer groupId) {
-		if (groupId!=null) {
+		if (groupId !=null) {
 			return permissionDomain.getPermissionJoinListDTO(groupDomain.findById(groupId).getPermissions().stream().map(Permission::getId).collect(Collectors.toSet()));
 		}
 		return permissionDomain.getPermissionJoinListDTO(null);

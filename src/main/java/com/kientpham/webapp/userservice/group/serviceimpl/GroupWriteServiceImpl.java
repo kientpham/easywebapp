@@ -9,12 +9,12 @@ import com.kientpham.webapp.userservice.group.Group;
 import com.kientpham.webapp.userservice.group.GroupDomain;
 import com.kientpham.webapp.userservice.group.GroupWriteService;
 import com.kientpham.webapp.commonlib.userserviceclient.dto.GroupEditDTO;
+import com.kientpham.webapp.commonlib.userserviceclient.dto.UserJoinListDTO;
+import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionJoinListDTO;
 import com.kientpham.webapp.userservice.user.User;
 import com.kientpham.webapp.userservice.user.UserDomain;
-import com.kientpham.webapp.commonlib.userserviceclient.dto.UserJoinListDTO;
 import com.kientpham.webapp.userservice.permission.Permission;
 import com.kientpham.webapp.userservice.permission.PermissionDomain;
-import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionJoinListDTO;
 import com.kientpham.webapp.commonlib.userserviceclient.dto.GroupTableDTO;
 import com.kientpham.webapp.shareservice.lookup.LookupReadService;
 
@@ -49,8 +49,8 @@ public class GroupWriteServiceImpl implements GroupWriteService{
 	public GroupEditDTO saveGroup(GroupEditDTO groupEditDTO) {
 		Group group=groupDomain.getGroupEntity(groupEditDTO);
 		group.setUsers(userDomain.findByListIds(groupEditDTO.getUsers()));
-group.setPermissions(permissionDomain.findByListIds(groupEditDTO.getPermissions()));
-;		groupDomain.save(group);
+		group.setPermissions(permissionDomain.findByListIds(groupEditDTO.getPermissions()));
+		groupDomain.save(group);
 		return groupEditDTO;
 	}
 }

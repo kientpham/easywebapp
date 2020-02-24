@@ -15,7 +15,6 @@ import lombok.Setter;
 @Setter
 public class Lookup{
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "LOOKUP_ID")
 	private Integer id;
 	@Column(name = "LOOKUP_TYPE")

@@ -55,8 +55,8 @@ public class GroupDomain{
 		Group group=new Group();
 		group.setId(groupEditDTO.getId());
 		group.setName(groupEditDTO.getName());
-		group.setDescription(groupEditDTO.getDescription());
 		group.setStatus(groupEditDTO.getStatus());
+		group.setDescription(groupEditDTO.getDescription());
 		return group;
 	}
 

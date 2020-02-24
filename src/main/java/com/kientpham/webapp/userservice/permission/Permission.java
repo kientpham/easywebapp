@@ -21,13 +21,10 @@ import lombok.Setter;
 @Setter
 public class Permission{
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "PERMISSION_ID")
-	private Integer id;
+	private String id;
 	@Column(name = "NAME")
 	private String name;
-	@Column(name = "TOGGLE")
-	private Boolean toggle;
 	@Column(name = "MENUPATH")
 	private String menuPath;
 	@Column(name = "URL")
@@ -38,6 +35,8 @@ public class Permission{
 	private String description;
 	@Column(name = "TYPE")
 	private Integer type;
+	@Column(name = "TOGGLE")
+	private Boolean toggle;
 	@ManyToMany
 	@JoinTable(name = "GROUP_PERMISSION_JOIN", joinColumns = { @JoinColumn(name = "PERMISSION_ID") }, inverseJoinColumns = {
 		@JoinColumn(name = "GROUP_ID") })

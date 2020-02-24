@@ -9,15 +9,16 @@ import lombok.Setter;
 public class GroupTableDTO{
 	private Integer id;
 	private String name;
-	private String description;
 	private String status;
+	private String description;
 
-	public GroupTableDTO(Group group,Map<Integer,String> lookupMap) {
+	public GroupTableDTO(Group group, Map<Integer,String> lookupMap) {
 		if(group !=null){
-			this.id=group.getId();
+			if (group.getId()!=null)
+				this.id=group.getId();
 			this.name=group.getName();
-			this.description=group.getDescription();
 			this.status=lookupMap.get(group.getStatus());
+			this.description=group.getDescription();
 		}
 	}
 }

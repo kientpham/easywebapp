@@ -3,6 +3,7 @@ import com.kientpham.webapp.userservice.user.User;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.UUID;
 
 
 @Getter
@@ -11,7 +12,7 @@ public class UserJoinListDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private UUID id;
 	
 	private String username;
 

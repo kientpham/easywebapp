@@ -32,7 +32,7 @@ public class LookupWriteServiceImpl implements LookupWriteService{
 	@Override
 	public LookupEditDTO saveLookup(LookupEditDTO lookupEditDTO) {
 		Lookup lookup=lookupDomain.getLookupEntity(lookupEditDTO);
-		;		lookupDomain.save(lookup);
+		lookupDomain.save(lookup);
 		return lookupEditDTO;
 	}
 }

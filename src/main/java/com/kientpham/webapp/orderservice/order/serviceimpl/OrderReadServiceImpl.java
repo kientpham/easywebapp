@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Map;
+import java.util.UUID;
 
 import com.kientpham.webapp.orderservice.order.Order;
 import com.kientpham.webapp.orderservice.order.OrderDomain;
@@ -19,7 +20,7 @@ public class OrderReadServiceImpl implements OrderReadService{
 	private OrderDomain orderDomain;
 
 	@Override
-	public OrderEditDTO getOrderEditDTOById(Integer id) {
+	public OrderEditDTO getOrderEditDTOById(UUID id) {
 		return new OrderEditDTO(orderDomain.findById(id));
 	}
 

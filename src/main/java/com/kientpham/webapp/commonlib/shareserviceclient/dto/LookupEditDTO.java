@@ -25,4 +25,9 @@ public class LookupEditDTO{
 			this.description=lookup.getDescription();
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return (this.lookupType+this.value).hashCode();		
+	}
 }

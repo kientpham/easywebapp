@@ -2,6 +2,7 @@ package com.kientpham.webapp.orderservice.order;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kientpham.webapp.commonlib.orderserviceclient.dto.OrderEditDTO;
 import com.kientpham.webapp.commonlib.orderserviceclient.dto.OrderTableDTO;
 import com.kientpham.webapp.orderservice.order.OrderReadService;
-import com.kientpham.webapp.commonlib.userserviceclient.dto.UserJoinListDTO;
+import com.kientpham.webapp.commonlib.orderserviceclient.dto.OrderItemJoinListDTO;
 
 @RestController
 @RequestMapping(value="/orderservice/orders")
@@ -28,7 +29,7 @@ public class OrderController{
 	}
 
 	@RequestMapping(value="ordereditdto",method=RequestMethod.GET)
-	public ResponseEntity<OrderEditDTO> getordereditdto(@RequestParam Integer id){
+	public ResponseEntity<OrderEditDTO> getordereditdto(@RequestParam UUID id){
 		return new ResponseEntity<OrderEditDTO>(orderReadService.getOrderEditDTOById(id),HttpStatus.OK);
 	}
 
@@ -39,7 +40,7 @@ public class OrderController{
 	}
 
 	@RequestMapping(method=RequestMethod.DELETE)
-	public String deleteOrder(@RequestBody(required=true) Integer id) {
+	public String deleteOrder(@RequestBody(required=true) UUID id) {
 		orderWriteService.deleteOrderById(id);
 		return "Successfully";
 	}

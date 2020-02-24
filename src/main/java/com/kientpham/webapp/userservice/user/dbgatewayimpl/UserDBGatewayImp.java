@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.kientpham.webapp.userservice.user.User;
 import com.kientpham.webapp.userservice.user.dbgatewayimpl.UserRepository;
 import com.kientpham.webapp.userservice.user.UserDBGateway;
+import java.util.UUID;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
@@ -25,17 +26,17 @@ public class UserDBGatewayImp implements UserDBGateway{
 	}
 
 	@Override
-	public User findById(Integer id) {
+	public User findById(UUID id) {
 		return repository.findById(id).orElse(new User());
 	}
 
 	@Override
-	public List<User> findByListIds(List<Integer> listId) {		
+	public List<User> findByListIds(List<UUID> listId) {		
 		return (List<User>) repository.findAllById(listId);
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteById(UUID id) {
 		repository.deleteById(id);		
 	}
 

@@ -5,11 +5,11 @@ import com.kientpham.webapp.userservice.permission.Permission;
 public interface PermissionDBGateway{
 	public List<Permission> findAll();
 
-	public Permission findById(Integer id);
+	public Permission findById(String id);
 
-	public List<Permission> findByListIds(List<Integer> listId);
+	public List<Permission> findByListIds(List<String> listId);
 
-	public void deleteById(Integer id);
+	public void deleteById(String id);
 
 	public Permission save(Permission entity);
 

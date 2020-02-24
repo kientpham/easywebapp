@@ -6,12 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.kientpham.webapp.userservice.user.User;
+import java.util.UUID;
+import java.util.Currency;import com.kientpham.webapp.orderservice.orderitem.OrderItem;
 
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import java.util.List;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,19 +22,20 @@ import lombok.Setter;
 @Setter
 public class Order{
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ORDER_ID")
-	private Integer id;
-	@Column(name = "ORDER_TITLE")
-	private String title;
+	private UUID id;
+	@Column(name = "ORDER_NO")
+	private String number;
+	@Column(name = "TOTAL_PRICE")
+	private Currency totalPrice;
 	@Column(name = "STATUS")
 	private Integer status;
 	@Column(name = "USER_ID")
-	private Integer userId;
-	@ManyToOne
-	@JoinTable(name = "USER_ORDER_JOIN", joinColumns = { @JoinColumn(name = "ORDER_ID") }, inverseJoinColumns = {
-		@JoinColumn(name = "USER_ID") })
-	private User user;
+	private UUID userId;
+	@OneToMany
+	@JoinTable(name = "null", joinColumns = { @JoinColumn(name = "ORDER_ITEM_ID") }, inverseJoinColumns = {
+		@JoinColumn(name = "null") })
+	private List<OrderItem> orderItems;
 	public Order() {
 		//default constructor
 	}

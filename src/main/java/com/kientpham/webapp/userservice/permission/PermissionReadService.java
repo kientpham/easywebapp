@@ -8,9 +8,9 @@ import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionEditDTO;
 
 public interface PermissionReadService{
 
-	public List<GroupJoinListDTO> getGroupJoinListDTO(Integer permissionId);
+	public List<GroupJoinListDTO> getGroupJoinListDTO(String permissionId);
 
-	public PermissionEditDTO getPermissionEditDTOById(Integer id);
+	public PermissionEditDTO getPermissionEditDTOById(String id);
 
 	public List<PermissionTableDTO> getListPermissionTableDTO();
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.kientpham.webapp.orderservice.order.Order;
 import com.kientpham.webapp.orderservice.order.dbgatewayimpl.OrderRepository;
 import com.kientpham.webapp.orderservice.order.OrderDBGateway;
+import java.util.UUID;
 
 @Component
 public class OrderDBGatewayImp implements OrderDBGateway{
@@ -17,17 +18,17 @@ public class OrderDBGatewayImp implements OrderDBGateway{
 	}
 
 	@Override
-	public Order findById(Integer id) {
+	public Order findById(UUID id) {
 		return repository.findById(id).orElse(new Order());
 	}
 
 	@Override
-	public List<Order> findByListIds(List<Integer> listId) {		
+	public List<Order> findByListIds(List<UUID> listId) {		
 		return (List<Order>) repository.findAllById(listId);
 	}
 
 	@Override
-	public void deleteById(Integer id) {
+	public void deleteById(UUID id) {
 		repository.deleteById(id);		
 	}
 

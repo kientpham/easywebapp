@@ -28,11 +28,11 @@ public class PermissionController{
 	}
 
 	@RequestMapping(value="/groupjoinlistdto", method=RequestMethod.GET)
-	public List<GroupJoinListDTO> getGroupJoinListDTO(@RequestParam Integer id){
+	public List<GroupJoinListDTO> getGroupJoinListDTO(@RequestParam String id){
 		return permissionReadService.getGroupJoinListDTO(id);
 	}
 	@RequestMapping(value="permissioneditdto",method=RequestMethod.GET)
-	public ResponseEntity<PermissionEditDTO> getpermissioneditdto(@RequestParam Integer id){
+	public ResponseEntity<PermissionEditDTO> getpermissioneditdto(@RequestParam String id){
 		return new ResponseEntity<PermissionEditDTO>(permissionReadService.getPermissionEditDTOById(id),HttpStatus.OK);
 	}
 
@@ -43,7 +43,7 @@ public class PermissionController{
 	}
 
 	@RequestMapping(method=RequestMethod.DELETE)
-	public String deletePermission(@RequestBody(required=true) Integer id) {
+	public String deletePermission(@RequestBody(required=true) String id) {
 		permissionWriteService.deletePermissionById(id);
 		return "Successfully";
 	}

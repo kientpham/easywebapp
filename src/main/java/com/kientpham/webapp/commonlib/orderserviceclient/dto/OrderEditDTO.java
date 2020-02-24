@@ -1,17 +1,20 @@
 package com.kientpham.webapp.commonlib.orderserviceclient.dto;
+import java.util.Currency;import java.util.UUID;
 import java.util.List;
 import com.kientpham.webapp.orderservice.order.Order;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class OrderEditDTO{
-	private Integer id;
-	private String title;
+	private UUID id;
+	private String number;
+	private Currency totalPrice;
 	private Integer status;
-	private Integer userId;
-	private List<Integer> user;
+	private UUID userId;
+	private List<String> orderItems;
 
 	public OrderEditDTO() {
 		//default constructor
@@ -19,9 +22,11 @@ public class OrderEditDTO{
 	public OrderEditDTO(Order order) {
 		if(order !=null){
 			this.id=order.getId();
-			this.title=order.getTitle();
+			this.number=order.getNumber();
+			this.totalPrice=order.getTotalPrice();
 			this.status=order.getStatus();
 			this.userId=order.getUserId();
 		}
 	}
+
 }

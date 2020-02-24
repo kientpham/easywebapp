@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+</head>
+<body>
+		<form class="modal fade" name="user_edit" id="editUser" method="POST" role="dialog" data-backdrop="static">			
+		<div class="modal-dialog modal-lg">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="dialogTitle">User Detail</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="au-card card-body card-block container" >
+					<input type="hidden" id="id" />
+											<div class="row">
+						<div class="col col-md-8">
+							
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Username </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="username" type="text" required class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Password </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="password" type="text"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">First Name </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="firstName" type="text"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Last Name </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="lastName" type="text"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Birth Date </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="birthDate" type="Date"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Email </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="email" type="email"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1 mw100">User Type </label>	
+								</div>
+									<div class="col col-md-4">
+									<select id="userType" name="cmbType"  class="mw160 input-sm form-control-sm form-control">
+									</select>
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="control-label mb-1 mw100">Status </label>	
+								</div>
+									<div class="col col-md-4">
+									<select id="status" name="cmbType"  class="mw160 input-sm form-control-sm form-control">
+									</select>
+								</div>
+							</div>
+
+							<div class="row form-group">
+								<div class="col col-sm-3">
+									<label class="form-control-label mw100">Address </label>	
+								</div>
+								<div class="col col-md-8">
+									<input id="address" type="text"  class="input-sm form-control-sm form-control mw160"/>									
+								</div>
+							</div>
+						</div>
+
+												<div class="col col-sm-4">
+														<div class="mw150 mh350" id="divtblGroup">
+								<table id="groups" class="display">
+									<thead>
+										<tr>
+											<th class="pr-2" width="10%"><input
+												type="checkbox" id="checkAllGroup"/></th>
+											<th class="pr-2" width="90%">All Group</th>
+
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row d-flex justify-content-center">
+						<button class="btn btn-primary m-2" id="btnSave">Save</button>
+						<button type="button" class="btn btn-secondary m-2" data-dismiss="modal">Cancel</button>
+					</div>
+					<div class="row">
+						<div class="row-left">&nbsp;</div>
+						<div class="row-right">
+							<span id="message" style="color: red;"></span>
+						</div>
+					</div>
+				</div>
+				<input type="submit" value="&nbsp;" class="hide">
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

@@ -6,10 +6,10 @@ import com.kientpham.webapp.commonlib.userserviceclient.dto.PermissionEditDTO;
 
 public interface PermissionWriteService{
 
-	public void deletePermissionById(Integer id);
+	public void deletePermissionById(String id);
 
 
-	public void deleteListPermission(List<Integer> ids);
+	public void deleteListPermission(List<String> ids);
 
 	public PermissionEditDTO savePermission(PermissionEditDTO permissionEditDTO);
 
